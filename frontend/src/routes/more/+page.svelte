@@ -16,6 +16,7 @@
   let products = $state([]);
   let contacts = $state([]);
   let companies = $state([]);
+  let allDocs = $state([]);
   let productSearch = $state('');
 
   const MAX_PRODUCT_ROWS = 50;
@@ -31,6 +32,26 @@
       (p.category || '').toLowerCase().includes(q) ||
       (p.price || '').toLowerCase().includes(q)
     );
+  });
+
+  let categoryBreakdown = $derived.by(() => {
+    const map = new Map();
+    for (const p of products) {
+      const cat = p.category || 'Uncategorized';
+      if (!map.has(cat)) map.set(cat, []);
+      map.get(cat).push(p.name || 'Unnamed');
+    }
+    return Array.from(map.entries())
+      .map(([category, names]) => ({
+        category,
+        count: names.length,
+        examples: names.slice(0, 3).join(', ')
+      }))
+      .sort((a, b) => b.count - a.count);
+  });
+
+  let productsWithSpecs = $derived.by(() => {
+    return products.filter(p => p.specs && p.specs.trim()).slice(0, 30);
   });
 
   onMount(async () => {
@@ -49,6 +70,7 @@
       try {
         const dataJson = await dataRes.json();
         const docs = Array.isArray(dataJson) ? dataJson : (dataJson.documents || dataJson.data || []);
+        allDocs = docs;
         const flat = [];
         for (const doc of docs) {
           let prods = doc.products;
@@ -374,6 +396,102 @@
                 {/each}
               </tbody>
             </table>
+          </div>
+        {/if}
+      </div>
+    </div>
+
+    <!-- CATEGORIES BREAKDOWN -->
+    <div class="card ink-border stamp-shadow stats-card table-card">
+      <div class="card-body" style="width:100%">
+        <h2>&#128202; CATEGORIES BREAKDOWN</h2>
+        {#if categoryBreakdown.length === 0}
+          <p class="muted">Loading categories...</p>
+        {:else}
+          <div class="table-scroll">
+            <table class="data-table compact">
+              <thead>
+                <tr>
+                  <th>CATEGORY</th>
+                  <th>PRODUCT COUNT</th>
+                  <th>EXAMPLE PRODUCTS</th>
+                </tr>
+              </thead>
+              <tbody>
+                {#each categoryBreakdown as row, i}
+                  <tr class={i % 2 === 0 ? 'row-even' : 'row-odd'}>
+                    <td>{row.category}</td>
+                    <td>{row.count}</td>
+                    <td>{row.examples}</td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
+        {/if}
+      </div>
+    </div>
+
+    <!-- PRODUCT SPECS -->
+    <div class="card ink-border stamp-shadow stats-card table-card">
+      <div class="card-body" style="width:100%">
+        <h2>&#128295; PRODUCT SPECS</h2>
+        {#if productsWithSpecs.length === 0}
+          <p class="muted">No products with specs found.</p>
+        {:else}
+          <div class="table-scroll">
+            <table class="data-table compact">
+              <thead>
+                <tr>
+                  <th>PRODUCT</th>
+                  <th>MODEL</th>
+                  <th>SPECS</th>
+                  <th>CATEGORY</th>
+                  <th>COMPANY</th>
+                </tr>
+              </thead>
+              <tbody>
+                {#each productsWithSpecs as p, i}
+                  <tr class={i % 2 === 0 ? 'row-even' : 'row-odd'}>
+                    <td>{p.name}</td>
+                    <td>{p.model}</td>
+                    <td class="specs-cell-wide">{p.specs}</td>
+                    <td>{p.category}</td>
+                    <td>{p.company}</td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
+        {/if}
+      </div>
+    </div>
+
+    <!-- IMAGE GALLERY -->
+    <div class="card ink-border stamp-shadow stats-card table-card">
+      <div class="card-body" style="width:100%">
+        <h2>&#128247; IMAGE GALLERY</h2>
+        {#if allDocs.length === 0}
+          <p class="muted">Loading images...</p>
+        {:else}
+          <div class="gallery-grid">
+            {#each allDocs as doc}
+              {#if doc.source_file && doc.folder}
+                <a
+                  class="gallery-thumb"
+                  href="{API}/api/image/{doc.folder}/{doc.source_file}"
+                  target="_blank"
+                  rel="noopener"
+                  title={doc.source_file}
+                >
+                  <img
+                    src="{API}/api/image/{doc.folder}/{doc.source_file}"
+                    alt={doc.source_file}
+                    loading="lazy"
+                  />
+                </a>
+              {/if}
+            {/each}
           </div>
         {/if}
       </div>
@@ -718,5 +836,41 @@
 
   .data-table tbody tr:hover {
     background: #e8e3d8;
+  }
+
+  .data-table .specs-cell-wide {
+    max-width: 300px;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+
+  /* --- Image Gallery --- */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 6px;
+    margin-top: 0.5rem;
+  }
+
+  .gallery-thumb {
+    display: block;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border: 2px solid #1a1a1a;
+    background: #f5f0e8;
+  }
+
+  .gallery-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .gallery-thumb:hover {
+    border-color: #2563eb;
+    box-shadow: 2px 2px 0 #2563eb;
   }
 </style>
