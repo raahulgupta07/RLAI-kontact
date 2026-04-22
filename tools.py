@@ -251,6 +251,30 @@ def get_catalog_summary() -> str:
         except Exception:
             contacts_table_count = 0
 
+        # Contacts with phone numbers
+        try:
+            contacts_with_phone = conn.execute(
+                "SELECT COUNT(*) as cnt FROM contacts WHERE phone IS NOT NULL AND phone != ''"
+            ).fetchone()["cnt"]
+        except Exception:
+            contacts_with_phone = 0
+
+        # Documents with GPS data
+        try:
+            docs_with_gps = conn.execute(
+                "SELECT COUNT(*) as cnt FROM documents WHERE gps_lat IS NOT NULL"
+            ).fetchone()["cnt"]
+        except Exception:
+            docs_with_gps = 0
+
+        # Documents with date_taken
+        try:
+            docs_with_date = conn.execute(
+                "SELECT COUNT(*) as cnt FROM documents WHERE date_taken IS NOT NULL AND date_taken != ''"
+            ).fetchone()["cnt"]
+        except Exception:
+            docs_with_date = 0
+
         # Build the summary
         lines = [
             "## KONTACT Catalog Summary\n",
@@ -258,6 +282,9 @@ def get_catalog_summary() -> str:
             f"- **Total products extracted:** {total_products:,}",
             f"- **Products table (normalized):** {products_table_count:,}",
             f"- **Contacts table (normalized):** {contacts_table_count:,}",
+            f"- **Contacts with phone numbers:** {contacts_with_phone:,}",
+            f"- **Documents with GPS data:** {docs_with_gps:,}",
+            f"- **Documents with date_taken:** {docs_with_date:,}",
             f"- **Companies:** {len(company_list)}",
         ]
 

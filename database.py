@@ -112,6 +112,23 @@ def init_db():
     except Exception:
         pass  # Column already exists
 
+    # Add flat metadata columns for SQL queryability
+    for col_def in [
+        "gps_lat REAL",
+        "gps_lng REAL",
+        "date_taken TEXT",
+        "camera_make TEXT",
+        "camera_model TEXT",
+        "img_width INTEGER",
+        "img_height INTEGER",
+        "file_size_kb REAL",
+    ]:
+        try:
+            c.execute(f"ALTER TABLE documents ADD COLUMN {col_def}")
+            c.commit()
+        except Exception:
+            pass  # Column already exists
+
     c.close()
 
 
@@ -121,10 +138,22 @@ def insert_extraction(folder: str, record: dict):
     metadata_json = None
     if record.get("metadata"):
         metadata_json = json.dumps(record["metadata"], ensure_ascii=False)
+    # Extract flat metadata fields
+    meta = record.get("metadata", {}) or {}
+    gps_lat = meta.get("gps_lat")
+    gps_lng = meta.get("gps_lng")
+    date_taken = meta.get("date_taken")
+    camera_make = meta.get("camera_make")
+    camera_model = meta.get("camera_model")
+    img_width = meta.get("img_width")
+    img_height = meta.get("img_height")
+    file_size_kb = meta.get("file_size_kb")
+
     c.execute("""
         INSERT OR REPLACE INTO documents
-        (folder, source_file, source_path, image_type, company, title, products, contact, key_info, raw_text, full_json, uuid, metadata)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (folder, source_file, source_path, image_type, company, title, products, contact, key_info, raw_text, full_json, uuid, metadata,
+         gps_lat, gps_lng, date_taken, camera_make, camera_model, img_width, img_height, file_size_kb)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         folder,
         record.get("source_file", ""),
@@ -139,6 +168,7 @@ def insert_extraction(folder: str, record: dict):
         json.dumps(record, ensure_ascii=False),
         doc_uuid,
         metadata_json,
+        gps_lat, gps_lng, date_taken, camera_make, camera_model, img_width, img_height, file_size_kb,
     ))
     doc_id = c.execute("SELECT id FROM documents WHERE folder = ? AND source_file = ?",
                        (folder, record.get("source_file", ""))).fetchone()
@@ -623,5 +653,34 @@ def get_documents_with_metadata(limit: int = 500) -> list:
     return results
 
 
+def backfill_metadata_columns():
+    """Read the metadata JSON column for all documents and populate the flat metadata columns."""
+    c = _conn()
+    rows = c.execute(
+        "SELECT id, metadata FROM documents WHERE metadata IS NOT NULL AND gps_lat IS NULL AND camera_make IS NULL AND date_taken IS NULL"
+    ).fetchall()
+    for row in rows:
+        try:
+            meta = json.loads(row["metadata"]) if isinstance(row["metadata"], str) else row["metadata"]
+        except Exception:
+            continue
+        if not isinstance(meta, dict):
+            continue
+        c.execute("""
+            UPDATE documents SET
+                gps_lat = ?, gps_lng = ?, date_taken = ?, camera_make = ?,
+                camera_model = ?, img_width = ?, img_height = ?, file_size_kb = ?
+            WHERE id = ?
+        """, (
+            meta.get("gps_lat"), meta.get("gps_lng"), meta.get("date_taken"),
+            meta.get("camera_make"), meta.get("camera_model"),
+            meta.get("img_width"), meta.get("img_height"), meta.get("file_size_kb"),
+            row["id"],
+        ))
+    c.commit()
+    c.close()
+
+
 init_db()
+backfill_metadata_columns()
 populate_normalized_tables()
