@@ -160,7 +160,7 @@ async def process_queue(batch_id: str = None):
 async def process_background(batch_id: str = None, bg: BackgroundTasks = None):
     pending = db.queue_pending(batch_id)
     if not pending:
-        raise HTTPException(400, "Nothing pending")
+        return {"status": "complete", "pending": 0, "batch_id": batch_id, "message": "Nothing pending"}
     bg.add_task(_process_batch, batch_id)
     return {"status": "processing", "pending": len(pending), "batch_id": batch_id}
 

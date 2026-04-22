@@ -25,8 +25,24 @@
   async function fetchBatches() { loading = true; try { batches = await api.getQueueBatches(); } catch (e) { log(`ERROR: ${e.message}`); } finally { loading = false; } }
   function log(msg) { const ts = new Date().toLocaleTimeString('en-US', { hour12: false }); logs = [...logs, `[${ts}] ${msg}`]; showTerminal = true; }
 
-  async function processAll() { processing = true; activeBatch = null; log('Processing all pending...'); try { await api.processQueue(); startPolling(); } catch (e) { log(`ERROR: ${e.message}`); processing = false; } }
-  async function processBatch(bid) { processing = true; activeBatch = bid; log(`Processing [${bid}]...`); try { await api.processQueue(bid); startPolling(bid); } catch (e) { log(`ERROR: ${e.message}`); processing = false; activeBatch = null; } }
+  async function processAll() {
+    processing = true; activeBatch = null; log('Processing all pending...');
+    try {
+      const result = await api.processQueue();
+      if (result.status === 'complete' || result.pending === 0) {
+        log('All items already processed.'); await fetchBatches(); processing = false;
+      } else { startPolling(); }
+    } catch (e) { log(`ERROR: ${e.message}`); processing = false; }
+  }
+  async function processBatch(bid) {
+    processing = true; activeBatch = bid; log(`Processing [${bid}]...`);
+    try {
+      const result = await api.processQueue(bid);
+      if (result.status === 'complete' || result.pending === 0) {
+        log('Already processed.'); await fetchBatches(); processing = false; activeBatch = null;
+      } else { startPolling(bid); }
+    } catch (e) { log(`ERROR: ${e.message}`); processing = false; activeBatch = null; }
+  }
 
   function startPolling(bid = null) {
     if (pollTimer) clearInterval(pollTimer);
