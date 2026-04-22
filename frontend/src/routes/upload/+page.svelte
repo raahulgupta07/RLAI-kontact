@@ -3,7 +3,11 @@
 
   let files = $state([]);
   let warnings = $state([]);
-  let batchName = $state(crypto.randomUUID().slice(0, 8));
+  function generateId() {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID().slice(0, 8);
+    return Math.random().toString(36).slice(2, 10);
+  }
+  let batchName = $state(generateId());
   let uploading = $state('idle');
   let result = $state(null);
   let fileInput;
@@ -121,7 +125,7 @@
       <button class="reset-btn ink-border" onclick={() => {
         files = [];
         warnings = [];
-        batchName = crypto.randomUUID().slice(0, 8);
+        batchName = generateId();
         uploading = 'idle';
         result = null;
       }}>
