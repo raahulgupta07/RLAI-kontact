@@ -34,7 +34,7 @@ def load_pdf(path: str) -> list[dict]:
     return results
 
 
-def load_image(path: str) -> dict | list[dict]:
+def load_image(path: str):
     ext = os.path.splitext(path)[1].lower()
     if ext == ".pdf":
         return load_pdf(path)

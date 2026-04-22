@@ -12,14 +12,83 @@
   let indexing = $state(false);
   let indexResult = $state(null);
 
+  // Table data
+  let products = $state([]);
+  let contacts = $state([]);
+  let companies = $state([]);
+  let productSearch = $state('');
+
+  const MAX_PRODUCT_ROWS = 50;
+
+  let filteredProducts = $derived.by(() => {
+    if (!productSearch.trim()) return products;
+    const q = productSearch.toLowerCase();
+    return products.filter(p =>
+      (p.company || '').toLowerCase().includes(q) ||
+      (p.name || '').toLowerCase().includes(q) ||
+      (p.model || '').toLowerCase().includes(q) ||
+      (p.specs || '').toLowerCase().includes(q) ||
+      (p.category || '').toLowerCase().includes(q) ||
+      (p.price || '').toLowerCase().includes(q)
+    );
+  });
+
   onMount(async () => {
     try {
-      const [statsRes, configRes] = await Promise.all([
+      const [statsRes, configRes, dataRes, contactsRes, dashRes] = await Promise.all([
         fetch(`${API}/api/stats`),
-        fetch(`${API}/api/config`)
+        fetch(`${API}/api/config`),
+        fetch(`${API}/api/data`),
+        fetch(`${API}/api/contacts`),
+        fetch(`${API}/api/dashboard`)
       ]);
       stats = await statsRes.json();
       modelConfig = await configRes.json();
+
+      // Build products flat array
+      try {
+        const dataJson = await dataRes.json();
+        const docs = Array.isArray(dataJson) ? dataJson : (dataJson.documents || dataJson.data || []);
+        const flat = [];
+        for (const doc of docs) {
+          let prods = doc.products;
+          if (typeof prods === 'string') {
+            try { prods = JSON.parse(prods); } catch { prods = []; }
+          }
+          if (Array.isArray(prods)) {
+            for (const p of prods) {
+              flat.push({
+                company: p.company || p.manufacturer || doc.company || '',
+                name: p.name || p.product_name || p.title || '',
+                model: p.model || p.model_number || p.sku || '',
+                specs: p.specs || p.specifications || p.description || '',
+                category: p.category || p.type || '',
+                price: p.price || p.msrp || '',
+                folder: doc.folder || ''
+              });
+            }
+          }
+        }
+        products = flat;
+      } catch (e) {
+        console.error('Failed to parse products:', e);
+      }
+
+      // Contacts
+      try {
+        const contactsJson = await contactsRes.json();
+        contacts = Array.isArray(contactsJson) ? contactsJson : (contactsJson.contacts || contactsJson.data || []);
+      } catch (e) {
+        console.error('Failed to load contacts:', e);
+      }
+
+      // Companies
+      try {
+        const dashJson = await dashRes.json();
+        companies = dashJson.companies_with_counts || [];
+      } catch (e) {
+        console.error('Failed to load companies:', e);
+      }
     } catch (e) {
       console.error('Failed to load stats:', e);
     }
@@ -189,6 +258,123 @@
           </p>
         {:else}
           <p class="muted">Loading...</p>
+        {/if}
+      </div>
+    </div>
+
+    <!-- PRODUCTS TABLE -->
+    <div class="card ink-border stamp-shadow stats-card table-card">
+      <div class="card-body" style="width:100%">
+        <div class="table-header-row">
+          <h2>&#128230; PRODUCTS TABLE</h2>
+          <button class="send-btn" onclick={() => window.open(`${API}/api/export/xlsx`)}>EXPORT XLSX</button>
+        </div>
+        <div class="table-toolbar">
+          <input
+            type="text"
+            class="search-input ink-border table-search"
+            placeholder="Filter products..."
+            bind:value={productSearch}
+          />
+          <span class="table-count">
+            Showing {Math.min(MAX_PRODUCT_ROWS, filteredProducts.length)} of {filteredProducts.length}
+          </span>
+        </div>
+        {#if products.length === 0}
+          <p class="muted">Loading products...</p>
+        {:else}
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>COMPANY</th>
+                  <th>PRODUCT</th>
+                  <th>MODEL</th>
+                  <th>SPECS</th>
+                  <th>CATEGORY</th>
+                  <th>PRICE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {#each filteredProducts.slice(0, MAX_PRODUCT_ROWS) as p, i}
+                  <tr class={i % 2 === 0 ? 'row-even' : 'row-odd'}>
+                    <td>{p.company}</td>
+                    <td>{p.name}</td>
+                    <td>{p.model}</td>
+                    <td class="specs-cell">{p.specs}</td>
+                    <td>{p.category}</td>
+                    <td>{p.price}</td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
+        {/if}
+      </div>
+    </div>
+
+    <!-- CONTACTS TABLE -->
+    <div class="card ink-border stamp-shadow stats-card table-card">
+      <div class="card-body" style="width:100%">
+        <h2>&#128222; CONTACTS TABLE</h2>
+        {#if contacts.length === 0}
+          <p class="muted">Loading contacts...</p>
+        {:else}
+          <div class="table-scroll">
+            <table class="data-table compact">
+              <thead>
+                <tr>
+                  <th>COMPANY</th>
+                  <th>PERSON</th>
+                  <th>PHONE</th>
+                  <th>EMAIL</th>
+                  <th>WEBSITE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {#each contacts as c, i}
+                  <tr class={i % 2 === 0 ? 'row-even' : 'row-odd'}>
+                    <td>{c.company || ''}</td>
+                    <td>{c.person || c.name || c.contact_name || ''}</td>
+                    <td>{c.phone || c.telephone || ''}</td>
+                    <td>{c.email || ''}</td>
+                    <td>{c.website || c.url || ''}</td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
+        {/if}
+      </div>
+    </div>
+
+    <!-- COMPANIES TABLE -->
+    <div class="card ink-border stamp-shadow stats-card table-card">
+      <div class="card-body" style="width:100%">
+        <h2>&#127970; COMPANIES TABLE</h2>
+        {#if companies.length === 0}
+          <p class="muted">Loading companies...</p>
+        {:else}
+          <div class="table-scroll">
+            <table class="data-table compact">
+              <thead>
+                <tr>
+                  <th>COMPANY</th>
+                  <th>DOCUMENTS</th>
+                  <th>PRODUCTS</th>
+                </tr>
+              </thead>
+              <tbody>
+                {#each companies as c, i}
+                  <tr class={i % 2 === 0 ? 'row-even' : 'row-odd'}>
+                    <td>{c.company || c.name || ''}</td>
+                    <td>{c.documents ?? c.doc_count ?? c.document_count ?? ''}</td>
+                    <td>{c.products ?? c.product_count ?? ''}</td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
         {/if}
       </div>
     </div>
@@ -436,5 +622,101 @@
   .error {
     color: #b91c1c;
     font-size: 0.8rem;
+  }
+
+  /* --- Data Tables --- */
+  .table-card {
+    flex-direction: column;
+  }
+
+  .table-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .table-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+    flex-wrap: wrap;
+  }
+
+  .table-search {
+    flex: 1;
+    min-width: 140px;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .table-count {
+    font-size: 0.65rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 0.25rem;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    min-width: 500px;
+  }
+
+  .data-table.compact {
+    font-size: 0.7rem;
+  }
+
+  .data-table thead tr {
+    background: #1a1a1a;
+    color: #f5f0e8;
+  }
+
+  .data-table th {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.65rem;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+    border: 2px solid #1a1a1a;
+    white-space: nowrap;
+  }
+
+  .data-table td {
+    padding: 0.3rem 0.5rem;
+    border: 2px solid #1a1a1a;
+    vertical-align: top;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .data-table .specs-cell {
+    max-width: 250px;
+  }
+
+  .row-even {
+    background: #fffef8;
+  }
+
+  .row-odd {
+    background: #f5f0e8;
+  }
+
+  .data-table tbody tr:hover {
+    background: #e8e3d8;
   }
 </style>
