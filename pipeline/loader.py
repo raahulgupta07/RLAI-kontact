@@ -1,5 +1,6 @@
 import base64, os
 from PIL import Image
+from PIL.ExifTags import TAGS, GPSTAGS
 from io import BytesIO
 
 try:
@@ -10,6 +11,73 @@ except ImportError:
 
 SUPPORTED = {".jpg", ".jpeg", ".png", ".jfif", ".webp", ".bmp", ".heic", ".heif", ".tiff", ".tif", ".avif", ".gif", ".pdf"}
 MAX_PX = 4096
+
+
+def _gps_to_decimal(gps_info):
+    """Convert GPS EXIF to decimal degrees."""
+    def _convert(value):
+        d, m, s = value
+        return float(d) + float(m)/60 + float(s)/3600
+
+    lat = _convert(gps_info.get(2, (0, 0, 0)))
+    lng = _convert(gps_info.get(4, (0, 0, 0)))
+    if gps_info.get(1) == 'S':
+        lat = -lat
+    if gps_info.get(3) == 'W':
+        lng = -lng
+    return lat, lng
+
+
+def extract_exif(path: str) -> dict:
+    """Extract EXIF metadata from an image file."""
+    meta = {
+        "gps_lat": None,
+        "gps_lng": None,
+        "date_taken": None,
+        "camera_make": None,
+        "camera_model": None,
+        "width": None,
+        "height": None,
+        "orientation": None,
+        "file_size_kb": round(os.path.getsize(path) / 1024, 1) if os.path.isfile(path) else None,
+    }
+    try:
+        img = Image.open(path)
+        meta["width"], meta["height"] = img.size
+
+        exif_data = img.getexif()
+        if not exif_data:
+            return meta
+
+        # Build tag name lookup
+        tag_map = {}
+        for tag_id, value in exif_data.items():
+            tag_name = TAGS.get(tag_id, tag_id)
+            tag_map[tag_name] = value
+
+        meta["date_taken"] = tag_map.get("DateTimeOriginal") or tag_map.get("DateTime")
+        meta["camera_make"] = tag_map.get("Make")
+        meta["camera_model"] = tag_map.get("Model")
+        meta["orientation"] = tag_map.get("Orientation")
+
+        if tag_map.get("ExifImageWidth"):
+            meta["width"] = tag_map["ExifImageWidth"]
+        if tag_map.get("ExifImageHeight"):
+            meta["height"] = tag_map["ExifImageHeight"]
+
+        # GPS info
+        gps_ifd = exif_data.get_ifd(0x8825)
+        if gps_ifd:
+            try:
+                lat, lng = _gps_to_decimal(gps_ifd)
+                if lat != 0.0 or lng != 0.0:
+                    meta["gps_lat"] = round(lat, 6)
+                    meta["gps_lng"] = round(lng, 6)
+            except Exception:
+                pass
+    except Exception:
+        pass
+    return meta
 
 
 def load_pdf(path: str) -> list[dict]:
@@ -38,6 +106,7 @@ def load_image(path: str):
     ext = os.path.splitext(path)[1].lower()
     if ext == ".pdf":
         return load_pdf(path)
+    metadata = extract_exif(path)
     img = Image.open(path).convert("RGB")
     w, h = img.size
     if max(w, h) > MAX_PX:
@@ -46,7 +115,7 @@ def load_image(path: str):
     buf = BytesIO()
     img.save(buf, format="JPEG", quality=90)
     b64 = base64.b64encode(buf.getvalue()).decode()
-    return {"file": os.path.basename(path), "path": path, "image_b64": b64}
+    return {"file": os.path.basename(path), "path": path, "image_b64": b64, "metadata": metadata}
 
 
 def load_folder(folder: str) -> list[dict]:

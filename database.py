@@ -105,16 +105,26 @@ def init_db():
     except Exception:
         pass  # Column already exists
 
+    # Add metadata column to documents if not exists
+    try:
+        c.execute("ALTER TABLE documents ADD COLUMN metadata TEXT")
+        c.commit()
+    except Exception:
+        pass  # Column already exists
+
     c.close()
 
 
 def insert_extraction(folder: str, record: dict):
     c = _conn()
     doc_uuid = str(uuid4())
+    metadata_json = None
+    if record.get("metadata"):
+        metadata_json = json.dumps(record["metadata"], ensure_ascii=False)
     c.execute("""
         INSERT OR REPLACE INTO documents
-        (folder, source_file, source_path, image_type, company, title, products, contact, key_info, raw_text, full_json, uuid)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (folder, source_file, source_path, image_type, company, title, products, contact, key_info, raw_text, full_json, uuid, metadata)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         folder,
         record.get("source_file", ""),
@@ -128,6 +138,7 @@ def insert_extraction(folder: str, record: dict):
         record.get("raw_text", ""),
         json.dumps(record, ensure_ascii=False),
         doc_uuid,
+        metadata_json,
     ))
     doc_id = c.execute("SELECT id FROM documents WHERE folder = ? AND source_file = ?",
                        (folder, record.get("source_file", ""))).fetchone()
@@ -588,6 +599,28 @@ def get_contacts_table(limit: int = 500) -> list:
     rows = c.execute("SELECT * FROM contacts ORDER BY company, person LIMIT ?", (limit,)).fetchall()
     c.close()
     return [dict(r) for r in rows]
+
+
+def get_documents_with_metadata(limit: int = 500) -> list:
+    """Return documents with parsed metadata."""
+    c = _conn()
+    rows = c.execute(
+        "SELECT id, uuid, folder, source_file, image_type, company, metadata, created_at FROM documents ORDER BY created_at DESC LIMIT ?",
+        (limit,)
+    ).fetchall()
+    c.close()
+    results = []
+    for r in rows:
+        d = dict(r)
+        if d.get("metadata"):
+            try:
+                d["metadata"] = json.loads(d["metadata"])
+            except Exception:
+                d["metadata"] = {}
+        else:
+            d["metadata"] = {}
+        results.append(d)
+    return results
 
 
 init_db()

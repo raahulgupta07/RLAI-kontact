@@ -265,6 +265,11 @@ def get_products():
     return db.get_products_table()
 
 
+@app.get("/api/documents/metadata")
+def get_documents_metadata(limit: int = 500):
+    return db.get_documents_with_metadata(limit)
+
+
 @app.post("/api/migrate")
 def run_migration():
     result = db.populate_normalized_tables()

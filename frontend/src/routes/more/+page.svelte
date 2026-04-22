@@ -17,11 +17,30 @@
   let contacts = $state([]);
   let companies = $state([]);
   let allDocs = $state([]);
+  let documents = $state([]);
+  let documentSearch = $state('');
   let productSearch = $state('');
   let contactSearch = $state('');
   let specsSearch = $state('');
 
   const MAX_PRODUCT_ROWS = 50;
+
+  function fmtDate(d) {
+    if (!d) return '';
+    try { return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); } catch { return d; }
+  }
+
+  let filteredDocuments = $derived.by(() => {
+    if (!documentSearch.trim()) return documents;
+    const q = documentSearch.toLowerCase();
+    return documents.filter(d =>
+      (d.folder || '').toLowerCase().includes(q) ||
+      (d.source_file || '').toLowerCase().includes(q) ||
+      (d.image_type || '').toLowerCase().includes(q) ||
+      (d.company || '').toLowerCase().includes(q) ||
+      (d.uuid || '').toLowerCase().includes(q)
+    );
+  });
 
   let filteredProducts = $derived.by(() => {
     if (!productSearch.trim()) return products;
@@ -81,44 +100,42 @@
 
   onMount(async () => {
     try {
-      const [statsRes, configRes, dataRes, contactsRes, dashRes] = await Promise.all([
+      const [statsRes, configRes, dataRes, contactsRes, dashRes, docsMetaRes, productsRes] = await Promise.all([
         fetch(`${API}/api/stats`),
         fetch(`${API}/api/config`),
         fetch(`${API}/api/data`),
         fetch(`${API}/api/contacts`),
-        fetch(`${API}/api/dashboard`)
+        fetch(`${API}/api/dashboard`),
+        fetch(`${API}/api/documents/metadata`),
+        fetch(`${API}/api/products`)
       ]);
       stats = await statsRes.json();
       modelConfig = await configRes.json();
 
-      // Build products flat array
+      // Build allDocs from data endpoint
       try {
         const dataJson = await dataRes.json();
-        const docs = Array.isArray(dataJson) ? dataJson : (dataJson.documents || dataJson.data || []);
-        allDocs = docs;
-        const flat = [];
-        for (const doc of docs) {
-          let prods = doc.products;
-          if (typeof prods === 'string') {
-            try { prods = JSON.parse(prods); } catch { prods = []; }
-          }
-          if (Array.isArray(prods)) {
-            for (const p of prods) {
-              flat.push({
-                company: p.company || p.manufacturer || doc.company || '',
-                name: p.name || p.product_name || p.title || '',
-                model: p.model || p.model_number || p.sku || '',
-                specs: p.specs || p.specifications || p.description || '',
-                category: p.category || p.type || '',
-                price: p.price || p.msrp || '',
-                folder: doc.folder || ''
-              });
-            }
-          }
-        }
-        products = flat;
+        allDocs = Array.isArray(dataJson) ? dataJson : (dataJson.documents || dataJson.data || []);
       } catch (e) {
-        console.error('Failed to parse products:', e);
+        console.error('Failed to parse data:', e);
+      }
+
+      // Products from normalized table (includes uuid + created_at)
+      try {
+        const prodsJson = await productsRes.json();
+        products = (Array.isArray(prodsJson) ? prodsJson : []).map(p => ({
+          uuid: p.uuid || '',
+          company: p.company || '',
+          name: p.name || p.product_name || '',
+          model: p.model || '',
+          specs: p.specs || '',
+          category: p.category || '',
+          price: p.price || '',
+          folder: p.folder || '',
+          created_at: p.created_at || ''
+        }));
+      } catch (e) {
+        console.error('Failed to load products:', e);
       }
 
       // Contacts
@@ -135,6 +152,14 @@
         companies = dashJson.companies_with_counts || [];
       } catch (e) {
         console.error('Failed to load companies:', e);
+      }
+
+      // Documents with metadata
+      try {
+        const docsMetaJson = await docsMetaRes.json();
+        documents = Array.isArray(docsMetaJson) ? docsMetaJson : [];
+      } catch (e) {
+        console.error('Failed to load documents metadata:', e);
       }
     } catch (e) {
       console.error('Failed to load stats:', e);
@@ -334,23 +359,27 @@
             <table class="data-table">
               <thead>
                 <tr>
+                  <th>UUID</th>
                   <th>COMPANY</th>
                   <th>PRODUCT</th>
                   <th>MODEL</th>
                   <th>SPECS</th>
                   <th>CATEGORY</th>
                   <th>PRICE</th>
+                  <th>CREATED</th>
                 </tr>
               </thead>
               <tbody>
                 {#each filteredProducts.slice(0, MAX_PRODUCT_ROWS) as p, i}
                   <tr class={i % 2 === 0 ? 'row-even' : 'row-odd'}>
+                    <td class="uuid-cell">{(p.uuid || '').slice(0, 8)}</td>
                     <td>{p.company}</td>
                     <td>{p.name}</td>
                     <td>{p.model}</td>
                     <td class="specs-cell">{p.specs}</td>
                     <td>{p.category}</td>
                     <td>{p.price}</td>
+                    <td class="date-cell">{fmtDate(p.created_at)}</td>
                   </tr>
                 {/each}
               </tbody>
@@ -372,6 +401,7 @@
             <table class="data-table compact">
               <thead>
                 <tr>
+                  <th>UUID</th>
                   <th>COMPANY</th>
                   <th>PERSON</th>
                   <th>PHONE</th>
@@ -382,6 +412,7 @@
               <tbody>
                 {#each filteredContacts as c, i}
                   <tr class={i % 2 === 0 ? 'row-even' : 'row-odd'}>
+                    <td class="uuid-cell">{(c.uuid || '').slice(0, 8)}</td>
                     <td>{c.company || ''}</td>
                     <td>{c.person || c.name || c.contact_name || ''}</td>
                     <td>{c.phone || c.telephone || ''}</td>
@@ -418,6 +449,61 @@
                     <td>{c.company || c.name || ''}</td>
                     <td>{c.documents ?? c.doc_count ?? c.document_count ?? ''}</td>
                     <td>{c.products ?? c.product_count ?? ''}</td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
+        {/if}
+      </div>
+    </div>
+
+    <!-- DOCUMENTS TABLE -->
+    <div class="card ink-border stamp-shadow stats-card table-card">
+      <div class="card-body" style="width:100%">
+        <h2>&#128195; DOCUMENTS TABLE</h2>
+        <div class="table-toolbar">
+          <input
+            type="text"
+            class="search-input ink-border table-search"
+            placeholder="Filter documents..."
+            bind:value={documentSearch}
+          />
+          <span class="table-count">{filteredDocuments.length} documents</span>
+        </div>
+        {#if documents.length === 0}
+          <p class="muted">Loading documents...</p>
+        {:else}
+          <div class="table-scroll">
+            <table class="data-table compact">
+              <thead>
+                <tr>
+                  <th>UUID</th>
+                  <th>FOLDER</th>
+                  <th>FILE</th>
+                  <th>TYPE</th>
+                  <th>COMPANY</th>
+                  <th>DIMENSIONS</th>
+                  <th>FILE SIZE</th>
+                  <th>GPS</th>
+                  <th>DATE TAKEN</th>
+                  <th>IMPORTED</th>
+                </tr>
+              </thead>
+              <tbody>
+                {#each filteredDocuments as d, i}
+                  {@const m = d.metadata || {}}
+                  <tr class={i % 2 === 0 ? 'row-even' : 'row-odd'}>
+                    <td class="uuid-cell">{(d.uuid || '').slice(0, 8)}</td>
+                    <td>{d.folder || ''}</td>
+                    <td>{d.source_file || ''}</td>
+                    <td>{d.image_type || ''}</td>
+                    <td>{d.company || ''}</td>
+                    <td>{m.width && m.height ? `${m.width}x${m.height}` : ''}</td>
+                    <td>{m.file_size_kb ? `${m.file_size_kb} KB` : ''}</td>
+                    <td>{m.gps_lat && m.gps_lng ? `${m.gps_lat}, ${m.gps_lng}` : ''}</td>
+                    <td>{m.date_taken || ''}</td>
+                    <td class="date-cell">{fmtDate(d.created_at)}</td>
                   </tr>
                 {/each}
               </tbody>
@@ -872,6 +958,20 @@
   .data-table tbody tr:hover {
     background: var(--color-surface-dim);
     opacity: 0.9;
+  }
+
+  .data-table .uuid-cell {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    color: #6b7280;
+    max-width: 70px;
+  }
+
+  .data-table .date-cell {
+    font-size: 10px;
+    white-space: nowrap;
+    color: #6b7280;
   }
 
   .data-table .specs-cell-wide {
