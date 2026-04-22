@@ -1,0 +1,224 @@
+[
+  {
+    "company": "Dahua Technology",
+    "title": "ENABLING A SMARTER SOCIETY AND BETTER LIVING",
+    "contact": {
+      "person": null,
+      "phone": null,
+      "email": "overseas@dahuatech.com",
+      "website": "www.dahuasecurity.com",
+      "address": "No.1199 Bin'an Road, Binjiang District, Hangzhou, China. 310053"
+    },
+    "offices": [
+      {
+        "region": "Dahua CEE & Nordic",
+        "phone": "+48 223957400",
+        "email": "dh.cen@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Poland Sp. z o.o.",
+        "phone": "+48 223957400",
+        "email": "biuro.pl@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology SRB D.O.O",
+        "phone": "+38 1 (11) 4429999",
+        "email": "dh.srb@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Hungary LTD",
+        "phone": "+36 17899852",
+        "email": "sales.hu@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Bulgaria EOOD",
+        "phone": "+35929950013",
+        "email": "support.bg@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology SRL",
+        "email": "marketing.ro@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Czech.s.r.o.",
+        "phone": "+420 225 986 001",
+        "email": "admin.cz@dahuatech.com"
+      },
+      {
+        "region": "Dahua Guvenlik Teknolojileri Sanayi ve Ticaret A.S.",
+        "email": "sales.tr@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Middle East FZE",
+        "email": "info.me@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Mexico S.A. DE C.V.",
+        "phone": "+52 55 67231936",
+        "email": "Dahua.Mexico@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Colombia S.A.S.",
+        "phone": "+57 6013106176",
+        "email": "marketing.co@dahuatech.com"
+      },
+      {
+        "region": "DAHUA ARGENTINA S.A.",
+        "address": "Lola Mora 421 piso 9no oficina 901 - CABA",
+        "email": "ventas.ar@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Chile SpA",
+        "phone": "+56 232705421",
+        "email": "sales.cl@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Perú S.A.C",
+        "phone": "+5115008555",
+        "email": "sales.pe@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Panama S.A.",
+        "address": "ciudad de Panamá, Punta Pacifica, torre de las Américas, torre C, oficina 2004"
+      },
+      {
+        "region": "Dahua Brazil",
+        "phone": "+55 11 32511871",
+        "email": "sales.pa@dahuatech.com"
+      },
+      {
+        "region": "Dahua Iberia, S.L.",
+        "phone": "+34 917649862",
+        "email": "sales.iberia@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Italy s.r.l.",
+        "phone": "+39 02 99912900",
+        "email": "info.italy@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Denmark Aps",
+        "email": "Nordic.ne@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology GmbH",
+        "phone": "+49 211 2054 4120",
+        "email": "sales.de@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Azerbaijan",
+        "email": "Dahua_Azerbaijan@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology India Private Limited",
+        "phone": "+91 124 4569100",
+        "email": "sales.india@dahuatech.com"
+      },
+      {
+        "region": "Dahua Europe BV",
+        "phone": "+31 (0) 85-0715700",
+        "email": "sales.benelux@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology France",
+        "phone": "+33 (0) 1 48 53 70 53",
+        "email": "sales.france@dahuatech.com"
+      },
+      {
+        "region": "Dahua Singapore",
+        "phone": "+65 65380952",
+        "email": "sales.sg@dahuatech.com"
+      },
+      {
+        "region": "Dahua Malaysia",
+        "phone": "+60376620732",
+        "email": "sales.my@dahuatech.com"
+      },
+      {
+        "region": "Dahua Indonesia",
+        "phone": "+62 27893330",
+        "email": "Sales.indo@dahuatech.com"
+      },
+      {
+        "region": "Dahua Philippines",
+        "phone": "1800 1550 0066",
+        "email": "Dahua_Philippines@dahuatech.com"
+      },
+      {
+        "region": "Dahua Australia",
+        "phone": "+61 290306000",
+        "email": "sales.oc@dahuatech.com"
+      },
+      {
+        "region": "Dahua New Zealand",
+        "phone": "+64 09 2823467",
+        "email": "Dahua_NZ@dahuatech.com"
+      },
+      {
+        "region": "Dahua Uzbekistan (OOO \"Dahua Vision\")",
+        "phone": "+998 781488666"
+      },
+      {
+        "region": "Dahua EEU Representative Office",
+        "phone": "8 (800) 707-67-66",
+        "email": "info.ru@dahuatech.com"
+      },
+      {
+        "region": "Dahua Kazakhstan (Dahua Technology Kazakhstan LLP)",
+        "phone": "+7 727 3110838",
+        "email": "sales.kz@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Ukraine Office",
+        "phone": "+380674011526",
+        "email": "dahua.ukraine@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology UK Limited",
+        "address": "1st Floor, The Quantum, 60 Norden Road, Maidenhead, SL6 4AY",
+        "phone": "+44(0)1628 200880",
+        "email": "sales.uk@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology South Africa (Pty) Ltd | Head Office",
+        "phone": "+27 10 593 3242",
+        "email": "sales.za@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Kenya Representative Ltd",
+        "email": "Eastafrica@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Nigeria Representative Ltd",
+        "email": "Westafrica@dahuatech.com"
+      },
+      {
+        "region": "Dahua Thailand",
+        "phone": "+66 2541 5188",
+        "email": "info.th@dahuatech.com"
+      },
+      {
+        "region": "Dahua Republic of Korea",
+        "phone": "+82-2-6486-8889",
+        "email": "sales.kr@dahuatech.com"
+      },
+      {
+        "region": "Dahua Vietnam",
+        "phone": "+84 1900 2620",
+        "email": "info.Dahuavietnam@dahuatech.com"
+      },
+      {
+        "region": "Dahua Technology Japan",
+        "phone": "+81-3-6661-6818",
+        "email": "Dahua_Japan@dahuatech.com"
+      }
+    ],
+    "raw_text": "ENABLING A SMARTER SOCIETY AND BETTER LIVING\n[List of regional offices and contact details]\nDAHUA TECHNOLOGY\nAdd: No.1199 Bin'an Road, Binjiang District, Hangzhou, China. 310053\nEmail: overseas@dahuatech.com\nWebsite: www.dahuasecurity.com\n• Copyright Statement\n• Liability Disclaimer",
+    "image_type": "contact_page",
+    "classifier_confidence": 1.0,
+    "source_file": "Image (10).jfif",
+    "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper2/Image (10).jfif",
+    "products": [],
+    "key_info": []
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "name": "KONTACT - Catalog Vision RAG",
+  "short_name": "KONTACT",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#feffd6",
+  "theme_color": "#383832",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

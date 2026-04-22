@@ -1,0 +1,141 @@
+[
+  {
+    "image_type": "product_page",
+    "company": null,
+    "title": "Retail Display Products and Signage Solutions",
+    "products": [
+      {
+        "name": "Self-Adhesive Clip Sign Holder",
+        "model": null,
+        "specs": "Self-adhesive mounting system for signage",
+        "category": "Sign Holders"
+      },
+      {
+        "name": "Electronic Price Tag",
+        "model": null,
+        "specs": "Digital price display system for retail shelving",
+        "category": "Electronic Displays"
+      },
+      {
+        "name": "Snap-on Price Holder",
+        "model": null,
+        "specs": "Transparent price tag holders with snap-on mounting",
+        "category": "Price Holders"
+      },
+      {
+        "name": "Price Tag",
+        "model": null,
+        "specs": "Standard retail price tags for shelf mounting",
+        "category": "Price Tags"
+      }
+    ],
+    "contact": {
+      "person": null,
+      "phone": null,
+      "email": null,
+      "website": null,
+      "address": null
+    },
+    "key_info": [
+      "Four different retail display and pricing solutions shown",
+      "Products designed for retail shelf and display applications",
+      "Mix of traditional and electronic pricing systems"
+    ],
+    "raw_text": "Self-Adhesive Clip Sign Holder Electronic price tag Snap-on Price Holder Price tag",
+    "source_file": "Image (1).jfif",
+    "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper1/Image (1).jfif"
+  },
+  {
+    "image_type": "product_page",
+    "company": null,
+    "title": "Retail Display Solutions",
+    "products": [
+      {
+        "name": "POP Clip",
+        "model": null,
+        "specs": "Wicker basket-style display clip for retail merchandise",
+        "category": "Point of Purchase Display"
+      },
+      {
+        "name": "Retail Shelf Dividers",
+        "model": null,
+        "specs": "Clear plastic shelf dividers for product organization in retail displays",
+        "category": "Shelf Management"
+      },
+      {
+        "name": "Partition Board Strip",
+        "model": null,
+        "specs": "Red cylindrical dispensers with Coca-Cola branding for beverage merchandising",
+        "category": "Beverage Display"
+      },
+      {
+        "name": "POP Clip",
+        "model": null,
+        "specs": "Clear plastic clips and holders for point-of-purchase displays and signage",
+        "category": "Point of Purchase Display"
+      }
+    ],
+    "contact": {
+      "person": null,
+      "phone": null,
+      "email": null,
+      "website": null,
+      "address": null
+    },
+    "key_info": [
+      "Four different retail display solutions shown",
+      "Products include POP clips, shelf dividers, partition board strips, and display clips",
+      "Focus on point-of-purchase and retail merchandising solutions",
+      "Coca-Cola branded beverage dispensers featured"
+    ],
+    "raw_text": "POP Clip Retail Shelf Dividers Partition Board Strip POP Clip",
+    "source_file": "Image (2).jfif",
+    "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper1/Image (2).jfif"
+  },
+  {
+    "image_type": "cover",
+    "company": "Ningbo Laohua Plastic Products Co., Ltd",
+    "title": "Company catalog cover with QR code",
+    "products": [],
+    "contact": {
+      "person": null,
+      "phone": null,
+      "email": null,
+      "website": "www.laohua.com",
+      "address": null
+    },
+    "key_info": [
+      "QR code present for additional information access",
+      "Text 'Scan to View More' indicates QR code functionality",
+      "Blue gradient background design"
+    ],
+    "raw_text": "Ningbo Laohua Plastic Products Co., Ltd www.laohua.com One-stop solutions Scan to View More",
+    "source_file": "Image (3).jfif",
+    "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper1/Image (3).jfif"
+  },
+  {
+    "image_type": "cover",
+    "company": "Ningjin Laohama Plastic Factory",
+    "title": "Company Brochure Cover",
+    "products": [],
+    "contact": {
+      "person": null,
+      "phone": null,
+      "email": null,
+      "website": "www.laohama.com",
+      "address": null
+    },
+    "key_info": [
+      "Quality Assurance",
+      "One-stop solutions",
+      "Undertake large orders",
+      "Hall No: Hall 1 Hesse Düsseldorf",
+      "Stand Number: 1 F01 5",
+      "Features images of woman in business attire and grocery store displays",
+      "Contains QR codes for additional information"
+    ],
+    "raw_text": "Ningjin Laohama Plastic Factory Quality Assurance One-stop solutions Undertake large orders Hall No: Hall 1 Hesse Düsseldorf Stand Number: 1 F01 5 www.laohama.com",
+    "source_file": "Image.jfif",
+    "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper1/Image.jfif"
+  }
+]

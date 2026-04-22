@@ -1,0 +1,18 @@
+services:
+  kontact:
+    build: .
+    ports:
+      - "${PORT:-8000}:${PORT:-8000}"
+    volumes:
+      - kontact-data:/app/data
+    env_file:
+      - .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${PORT:-8000}/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  kontact-data:

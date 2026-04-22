@@ -1,0 +1,47 @@
+[
+  {
+    "company": null,
+    "title": null,
+    "products": [
+      {
+        "name": "POP Clip",
+        "model": null,
+        "specs": "Adjustable arm clips for signage",
+        "category": "POP Clip",
+        "price": null,
+        "image_desc": "A collection of black and clear plastic clips with adjustable arms, some attached to a wicker basket."
+      },
+      {
+        "name": "Retail Shelf Dividers",
+        "model": null,
+        "specs": "Clear acrylic vertical dividers",
+        "category": "Retail Shelf Dividers",
+        "price": null,
+        "image_desc": "Clear plastic dividers installed on retail shelves to organize snacks and bottled beverages."
+      },
+      {
+        "name": "Partition Board Strip",
+        "model": null,
+        "specs": "Clear plastic strip for shelf organization",
+        "category": "Partition Board Strip",
+        "price": null,
+        "image_desc": "A clear plastic strip used to hold and organize soda cans on a shelf."
+      },
+      {
+        "name": "POP Clip",
+        "model": null,
+        "specs": "Small circular base clips for digital price tags",
+        "category": "POP Clip",
+        "price": null,
+        "image_desc": "Several small, circular-based clips holding digital price tags displaying various prices like 39.00, 3.270, and 2.80."
+      }
+    ],
+    "raw_text": "older\nPOP Clip\nRetail Shelf Dividers\nPartition Board Strip\nPOP Clip\n39.00\n3.270\n2.80",
+    "image_type": "product_page",
+    "classifier_confidence": 0.95,
+    "source_file": "Image (2).jfif",
+    "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/5781ca46/Image (2).jfif",
+    "contact": {},
+    "key_info": []
+  }
+]

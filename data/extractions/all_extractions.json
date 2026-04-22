@@ -1,0 +1,1603 @@
+{
+  "Paper1": [
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "Retail Display Products and Signage Solutions",
+      "products": [
+        {
+          "name": "Self-Adhesive Clip Sign Holder",
+          "model": null,
+          "specs": "Self-adhesive mounting system for signage",
+          "category": "Sign Holders"
+        },
+        {
+          "name": "Electronic Price Tag",
+          "model": null,
+          "specs": "Digital price display system for retail shelving",
+          "category": "Electronic Displays"
+        },
+        {
+          "name": "Snap-on Price Holder",
+          "model": null,
+          "specs": "Transparent price tag holders with snap-on mounting",
+          "category": "Price Holders"
+        },
+        {
+          "name": "Price Tag",
+          "model": null,
+          "specs": "Standard retail price tags for shelf mounting",
+          "category": "Price Tags"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Four different retail display and pricing solutions shown",
+        "Products designed for retail shelf and display applications",
+        "Mix of traditional and electronic pricing systems"
+      ],
+      "raw_text": "Self-Adhesive Clip Sign Holder Electronic price tag Snap-on Price Holder Price tag",
+      "source_file": "Image (1).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper1/Image (1).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "Retail Display Solutions",
+      "products": [
+        {
+          "name": "POP Clip",
+          "model": null,
+          "specs": "Wicker basket-style display clip for retail merchandise",
+          "category": "Point of Purchase Display"
+        },
+        {
+          "name": "Retail Shelf Dividers",
+          "model": null,
+          "specs": "Clear plastic shelf dividers for product organization in retail displays",
+          "category": "Shelf Management"
+        },
+        {
+          "name": "Partition Board Strip",
+          "model": null,
+          "specs": "Red cylindrical dispensers with Coca-Cola branding for beverage merchandising",
+          "category": "Beverage Display"
+        },
+        {
+          "name": "POP Clip",
+          "model": null,
+          "specs": "Clear plastic clips and holders for point-of-purchase displays and signage",
+          "category": "Point of Purchase Display"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Four different retail display solutions shown",
+        "Products include POP clips, shelf dividers, partition board strips, and display clips",
+        "Focus on point-of-purchase and retail merchandising solutions",
+        "Coca-Cola branded beverage dispensers featured"
+      ],
+      "raw_text": "POP Clip Retail Shelf Dividers Partition Board Strip POP Clip",
+      "source_file": "Image (2).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper1/Image (2).jfif"
+    },
+    {
+      "image_type": "cover",
+      "company": "Ningbo Laohua Plastic Products Co., Ltd",
+      "title": "Company catalog cover with QR code",
+      "products": [],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": "www.laohua.com",
+        "address": null
+      },
+      "key_info": [
+        "QR code present for additional information access",
+        "Text 'Scan to View More' indicates QR code functionality",
+        "Blue gradient background design"
+      ],
+      "raw_text": "Ningbo Laohua Plastic Products Co., Ltd www.laohua.com One-stop solutions Scan to View More",
+      "source_file": "Image (3).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper1/Image (3).jfif"
+    },
+    {
+      "image_type": "cover",
+      "company": "Ningjin Laohama Plastic Factory",
+      "title": "Company Brochure Cover",
+      "products": [],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": "www.laohama.com",
+        "address": null
+      },
+      "key_info": [
+        "Quality Assurance",
+        "One-stop solutions",
+        "Undertake large orders",
+        "Hall No: Hall 1 Hesse Düsseldorf",
+        "Stand Number: 1 F01 5",
+        "Features images of woman in business attire and grocery store displays",
+        "Contains QR codes for additional information"
+      ],
+      "raw_text": "Ningjin Laohama Plastic Factory Quality Assurance One-stop solutions Undertake large orders Hall No: Hall 1 Hesse Düsseldorf Stand Number: 1 F01 5 www.laohama.com",
+      "source_file": "Image.jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper1/Image.jfif"
+    }
+  ],
+  "Paper2": [
+    {
+      "image_type": "contact_page",
+      "company": "Dahua Technology",
+      "title": "ENABLING A SMARTER SOCIETY AND BETTER LIVING - Global Contact Information",
+      "products": [],
+      "contact": {
+        "person": null,
+        "phone": "+86 571 8768 8883",
+        "email": "overseas@dahuatech.com",
+        "website": "www.dahuasecurity.com",
+        "address": "No.1199 Bin'an Road, Binjiang District, Hangzhou, China. 310053"
+      },
+      "key_info": [
+        "Global contact directory with offices in multiple countries",
+        "Offices in CEE & Nordic, Australia, New Zealand, Brazil, Uzbekistan, EEU, Kazakhstan, Ukraine, UK, Azerbaijan, India, Europe, France, Kenya, Nigeria, Thailand, Korea, Vietnam, Philippines, Peru, Colombia, Argentina, Indonesia, Malaysia, and more",
+        "Copyright statement and liability disclaimer included",
+        "QR codes for YouTube, LinkedIn, Partner App, and WeChat",
+        "Document version Ver. 1, Jan. 2020"
+      ],
+      "raw_text": "ENABLING A SMARTER SOCIETY AND BETTER LIVING\n\nDahua CEE & Nordic\nTel: +48 223957400\nEmail: chn.cee@dahuatech.com\n\nDahua Technology Poland Sp. z o.o.\nTel: +48 223957400\nEmail: biuro.pl@dahuatech.com\n\nDahua Technology SRB D.O.O\nTel: +381 113042950\nEmail: srb@dahuatech.com\n\nDahua Technology Czech s.r.o\nTel: +36 17859862\nEmail: sales.hu@dahuatech.com\n\nDahua Technology Bulgaria EOOD\nTel: +359299500113\nSupport: support.bg@dahuatech.com\n\nDahua Technology Romania\nEmail: marketing.ro@dahuatech.com\n\nDahua Technology Slovakia s.r.o.\nTel: +420 225 986 001\nEmail: admin.cz@dahuatech.com\n\nDahua Güvenlik Teknolojileri Sanayi ve Ticaret A.S.\nEmail: sales.tr@dahuatech.com\n\nDahua Technology Middle East FZE\nEmail: info.me@dahuatech.com\n\nDahua Technology Mexico S.A. DE C.V.\nOffice TEL: +52 55 67231936\nTechnical Hotline: 5556782009\nWhatsApp: +52 55 6723 1936\nEmail: Dahua.Mexico@dahuatech.com\nSupport: support.mx@dahuatech.com\n\nDahua Technology Colombia S.A.S.\nOffice TEL: +57 6013340176\nTechnical Hotline: 5780051906087\nWhatsApp: +52 55 6723 1936\nEmail: sales.co@dahuatech.com\nSupport: support.co@dahuatech.com\n\nDAHUA ARGENTINA\nDomicilio: Lote Mira 421 piso 9no oficina 901 - CABA\nCUIT: 30-71548925-9\nMail: ventas.ar@dahuatech.com\n\nDahua Technology Chile SpA\nOffice TEL: +56 232705421\nTechnical Hotline: +56 226660989\nWhatsApp: +52 55 9337 2150\nEmail: sales.cl@dahuatech.com\nSupport: support.cl@dahuatech.com\n\nDahua Technology Peru S.A.C\nOffice TEL: +51 16406870\nTechnical Hotline: 80056168\nWhatsApp: +51 959 937 2150\nEmail: sales.pe@dahuatech.com\nSupport: support.pe@dahuatech.com\n\nDahua Technology Panama S.A.\nDirección: Calle 50 Panamá, Punta Pacifica, torre de las\nAméricas, torre C, oficina 2004\n\nWhatsApp: +52 55 9337 2150\nEmail: sales.pa@dahuatech.com\nSupport: support.pa@dahuatech.com\n\nDahua Brazil\nOffice telephone: +55 11 32511871\nWhatsApp +55 11 91554 5386\nTechnical support: support.br@dahuatech.com\n\nDahua Iberia S.L.\nOffice TEL: +34 91 179 4120\nEmail: sales.iberia@dahuatech.com\nSupport: support.iberia@dahuatech.com\n\nDahua Technology Italy s.r.l.\nOffice TEL: +39 02 99912900\nEmail: info.italy@dahuatech.com\nSupport: support.italy@dahuatech.com\n\nDahua Technology Denmark Aps\nEmail: Nordic.ne@dahuatech.com\n\nDahua Technology GmbH\nTel: +49 211 20544120\nEmail: sales.de@dahuatech.com\nSupport: support.de@dahuatech.com\n\nDahua Technology Azerbaijan\nEmail: Dahua_Azerbaijan@dahuatech.com\n\nDahua Technology India Private Limited\nOffice TEL: +91 124 4569100\nTechnical Hotline: 1800 1035719\nWhatsApp: +91 8800027758\nEmail: sales.india@dahuatech.com\n\nDahua Europe BV\nTel: +31 (0) 85-0173700\nEmail: sales.benelux@dahuatech.com\nSupport: support.benelux@dahuatech.com\n\nDahua Technology France\nOffice TEL: +33 (0)1 84 25 70 53\nTechnical Hotline: 33176278451\nEmail: sales.france@dahuatech.com\nSupport: support.france@dahuatech.com\n\nDahua Singapore\nOffice TEL: +65 31298008\nTechnical Hotline: 65 31298008\nWhatsApp: +60-11-56535900\nEmail: sales.sg@dahuatech.com\n\nDahua Malaysia\nOffice TEL: +603766200732\nTechnical Hotline: +60 11 80081318\nWhatsApp: +60-11-56535900\nEmail: sales.my@dahuatech.com\n\nDahua Indonesia\nOffice TEL: +62 17893330\nTechnical Hotline: +62 17893376\nWhatsApp: +62 811-1001-6201\nEmail: sales.indo@dahuatech.com\nSupport: support.id@dahuatech.com\n\nDahua Philippines\nOffice TEL: 1800 1550 0066\nTechnical Hotline: 63283409766\nEmail: Dahua_Philippines@dahuatech.com\n\nDahua Australia\nOffice TEL: +61 290506900\nTechnical Hotline: 1800 531 462\nEmail: sales.au@dahuatech.com\n\nDahua New Zealand\nOffice TEL: +64 9 6293467\nTechnical Hotline: +64 800 106\nEmail: Dahua_NZ@dahuatech.com\n\nDahua Uzbekistan (OOO \"Dahua Vision\")\nTel: +998 781 205 8100\n\nDahua EEU Representative Office\nTel: 8 (800) 707-67-66\nEmail: sales.eeu@dahuatech.com\n\nDahua Kazakhstan (Dahua Technology Kazakhstan LLP)\nTel: +7 727 311 0063\nEmail: sales.kz@dahuatech.com\n\nDahua Technology Ukraine Representative Office\nOffice TEL: +380674011526\nTechnical Hotline: +38 067 2690830\nEmail: dahua.ukraine@dahuatech.com\n\nDahua Technology UK Limited\nHQ : 1st Floor, The Quantum, 60 Norden Road, Maidenhead, SL6 6AY\nSales: sales.uk@dahuatech.com\nTechnical Support: support.uk@dahuatech.com\nContact Tel: +44 1628 676000 (Trade Only) (or & Ireland)\nPress Enquiries: press.uk@dahuatech.com\n\nDahua Technology Scotland (Pty) Ltd | Head Office\nOffice TEL: +27 10 593 3242\nWhatsApp Help-Line: +27 (0)87 352 2987\nToll-Free Help-Line: 080 099 0064\nEmail: sales.africa@dahuatech.com\nSupport: support.africa@dahuatech.com\n\nDahua Technology Kenya Representative Ltd\nEmail: EastAfrica@dahuatech.com\nWhatsApp Help-Line: +27 (0) 111055510\n\nDahua Technology Nigeria Representative Ltd.\nEmail: WestAfrica@dahuatech.com\n\nDahua Thailand\nOffice TEL: +66 2 541 5188\nTechnical Hotline: 66 21712482\nLine Official: @dahua_thailand\nEmail: info.th@dahuatech.com\n\nDahua Republic of Korea\nOffice TEL: +82-2-6488-8883\nTechnical Hotline: 2185968836\nEmail: sales.kr@dahuatech.com\n\nDahua Vietnam\nOffice TEL: +84 1900 2620\nTechnical Hotline: 84 1900 2620\nEmail: info.DahuaVietnam@dahuatech.com\n\nDahua Technology Japan\nTel: +81-3-6661-6818\nFax: +81-3-6661-6819\nEmail: Dahua_Japan@dahuatech.com\n\nVer. 1, Jan. 2020\n\nDAHUA TECHNOLOGY\nAdd: No.1199 Bin'an Road, Binjiang District, Hangzhou, China. 310053\nEmail: overseas@dahuatech.com\nWebsite: www.dahuasecurity.com\n\n• Copyright Statement\nWithout the written permission of the original author and the Dahua brand, please do not reproduce, copy, modify, disseminate, or use for any commercial purposes that are not combined with the Dahua brand or Dahua products.\n\n• Liability Disclaimer\nThe Dahua brand assumes no legal responsibility for any copyright disputes arising from your use of this material.\n\nYouTube    LinkedIn    Partner App    WeChat",
+      "source_file": "Image (10).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper2/Image (10).jfif"
+    },
+    {
+      "image_type": "cover",
+      "company": "Ahua",
+      "title": "Protect Profits with Advanced Security & Surveillance Solutions",
+      "products": [],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Data Retail Loss Prevention Solutions",
+        "Focus on security and surveillance systems",
+        "Retail-oriented security solutions"
+      ],
+      "raw_text": "Ahua Protect Profits with Advanced Security & Surveillance Solutions Data Retail Loss Prevention Solutions",
+      "source_file": "Image (4).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper2/Image (4).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "Background and Challenges",
+      "products": [],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Real Crimes cycle showing challenges and expenditure protection",
+        "More than 400 bitcoin absolute incidents per day",
+        "Around USD 1.35 Bn spent on loss prevention",
+        "Definition section explains retail loss prevention as asset protection important for companies to prevent profits",
+        "What we offer section mentions Solucions combine traditional security and surveillance with advanced technology",
+        "Mentions Smart POS, Internal Alerts System, POS Integration, and advanced detection systems"
+      ],
+      "raw_text": "Background Real Crimes Challenges More than 400 bitcoin absolute incidents per day Around USD 1.35 Bn spent on loss prevention Expenditure protection Definition Retail loss prevention is asset protection important for companies to prevent profits. Companies use various methods including employee background checks, asset protection, and surveillance systems to prevent theft and loss. What we offer? Solucions combine traditional security and surveillance with advanced technology and streamline the workflow. A Smart POS, Internal Alerts System, POS Integration, and advanced detection systems help prevent theft and loss. Thank you for shopping with us",
+      "source_file": "Image (5).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper2/Image (5).jfif"
+    },
+    {
+      "image_type": "tech_diagram",
+      "company": null,
+      "title": "Analysis of Retail Loss Prevention Scenarios",
+      "products": [],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Multi-level retail store security analysis diagram",
+        "Shows various loss prevention scenarios across different floors",
+        "Includes detection systems and monitoring points",
+        "Features customer flow patterns and security coverage areas"
+      ],
+      "raw_text": "Analysis of Retail Loss Prevention Scenarios PROTECT PROFITS WITH ADVANCED SECURITY & SURVEILLANCE SOLUTIONS 8 Shrink Detection • Basket count controller • EAS (3058) 7 Shrink Detection • Basket count controller • EAS • Slip Prevention • Customer Dialogue 6 Public View Monitor • Basket count controller • EAS • Slip Prevention • Customer Dialogue 5 Shrink Alarm System • Basket count controller • EAS • Slip Prevention • Customer Dialogue 4 Intelligent Fence System • Basket count controller • EAS • Slip Prevention • Customer Dialogue 3 Unmonitored Person Detection System • Basket count controller • EAS • Slip Prevention • Customer Dialogue 2 EAS • Basket count controller • EAS • Slip Prevention • Customer Dialogue 1 POS Integration • Basket count controller • EAS • Slip Prevention • Customer Dialogue",
+      "source_file": "Image (6).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper2/Image (6).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": "Daihua",
+      "title": "POS Video Loss Prevention System Overview",
+      "products": [
+        {
+          "name": "Daihua POS Video Loss Prevention System",
+          "model": null,
+          "specs": "Network topology, camera integration, POS data recording and playback",
+          "category": "Security/Surveillance System"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "PROTECT PROFITS WITH ADVANCED SECURITY & SURVEILLANCE SOLUTIONS",
+        "Network topology showing camera connections",
+        "Value of POS and video integration",
+        "Reduces shrinkage, improves customer service",
+        "Video recording and playback capabilities",
+        "Real-time monitoring and review",
+        "Easy-to-use interface for operators",
+        "Highlights suspicious transactions",
+        "System overview with multiple camera angles",
+        "Loss Prevention Benefits highlighted",
+        "High Definition video quality",
+        "Smart Playback features"
+      ],
+      "raw_text": "I Overview of Daihua POS Video Loss Prevention System PROTECT PROFITS WITH ADVANCED SECURITY & SURVEILLANCE SOLUTIONS Network Topology NETWORK Value of POS and video • Reduces shrinkage • Improves customer service • Video recording and playback • Real-time monitoring and review • Easy-to-use interface for operators • Highlights suspicious transactions I Overview of Daihua EAS Loss Prevention System PROTECT PROFITS WITH ADVANCED SECURITY & SURVEILLANCE SOLUTIONS For medium to large retail stores, supermarkets and chain stores, Daihua offers comprehensive EAS (Electronic Article Surveillance) solutions to reduce shrinkage. Loss Prevention Benefits High Definition Smart Playback Highlights POS",
+      "source_file": "Image (7).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper2/Image (7).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": "PERFECT PRISMS",
+      "title": "Unauthorized Person Detection System (UDS) Overview",
+      "products": [
+        {
+          "name": "Unauthorized Person Detection System",
+          "model": "UDS",
+          "specs": "Information sharing, Unauthorized person identification, Cross-zone protection",
+          "category": "Security System"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "PERFECT PRISMS with ADVANCED SECURITY & SURVEILLANCE SOLUTIONS",
+        "Process includes: Entrance detection, Pop-up Alarm, Handle the situation",
+        "Platform alarm detection with person in unauthorized location",
+        "Real-time Alarm detection with person in the unauthorized location",
+        "Capture image, Store and Communicate, Alert to the concerned person and concerned location",
+        "Landing - Capture image, Store and Communicate, Alert to the concerned person and concerned location",
+        "Catching - Capture image, Store and Communicate, Alert to the concerned person and concerned location",
+        "First Movement - Capture image, Store and Communicate, Alert to the concerned person and concerned location",
+        "Intrusion - Capture image, Store and Communicate, Alert to the concerned person and concerned location",
+        "Overview of Datua Intelligent Defence System (IDS)",
+        "The application is used to detect the unauthorized person and classify the target and send alert to the concerned authority. By connecting the RFID/card reader and camera with the application."
+      ],
+      "raw_text": "PERFECT PRISMS with ADVANCED SECURITY & SURVEILLANCE SOLUTIONS\n\nUnauthorized Person Detection System (UDS)\n\nValue\nInformation sharing\n\nProcess\nEntrance\nPop-up Alarm\nHandle the situation\n\nPlatform alarm detection with person in unauthorized location\n\nReal-time Alarm detection with person in the unauthorized location\n\nCapture image\nStore and Communicate\nAlert to the concerned person and concerned location\n\nLanding\nCapture image, Store and Communicate, Alert to the concerned person and concerned location\n\nCatching\nCapture image, Store and Communicate, Alert to the concerned person and concerned location\n\nFirst Movement\nCapture image, Store and Communicate, Alert to the concerned person and concerned location\n\nIntrusion\nCapture image, Store and Communicate, Alert to the concerned person and concerned location\n\nOverview of Datua Intelligent Defence System (IDS)\n\nThe application is used to detect the unauthorized person and classify the target and send alert to the concerned authority. By connecting the RFID/card reader and camera with the application.",
+      "source_file": "Image (8).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper2/Image (8).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": "PROTECT PROINTS WITH ADVANCED SECURITY & SURVEILLANCE SOLUTIONS",
+      "title": "I Overview of TQIC Alarm - Public View Monitor",
+      "products": [
+        {
+          "name": "TQIC Alarm",
+          "model": null,
+          "specs": "Alarm signals of all sensors in the store can be transmitted in real time",
+          "category": "Security System"
+        },
+        {
+          "name": "Public View Monitor",
+          "model": null,
+          "specs": "What types of suspected shopping behaviors can be detected?",
+          "category": "Monitoring System"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Wireless System connectivity",
+        "Overview of Planta Signifying Detection System",
+        "Core Products with intelligent video analytics service",
+        "Solution Value with 01, 02, 03 numbered features",
+        "Up to 32 channels capacity",
+        "Behavior detection capabilities"
+      ],
+      "raw_text": "PROTECT PROINTS WITH ADVANCED SECURITY & SURVEILLANCE SOLUTIONS I Overview of TQIC Alarm Alarm signals of all sensors in the store can be transmitted in real time Wireless System Public View Monitor What types of suspected shopping behaviors can be detected? Overview of Planta Signifying Detection System Core Products Solution Value 01 Real-time AI On-Scene 02 Ultra-Intelligent Video Analytics 03 Behavior detection Up to 32 channels capacity Intelligent video analytics service",
+      "source_file": "Image (9).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper2/Image (9).jfif"
+    }
+  ],
+  "Paper3": [
+    {
+      "image_type": "cover",
+      "company": "JIASHAN SHANGHE DISPLAY PRODUCTS CO.,LTD",
+      "title": "SHANGHE - Professional Supplier of POP display accessories for Store and Supermarket",
+      "products": [],
+      "contact": {
+        "person": "shirley",
+        "phone": "+86-15268367084",
+        "email": "shirley@jiashanghe.cn",
+        "website": "www.sh-retailsolution.com, www.zjxldisplay.com, https://zjxull.en.alibaba.com, http://jiashanghe.en.alibaba.com",
+        "address": "Room.701,Building 9th,NO.568 East JinYang Road,Jiashan county,Zhejiang province,China"
+      },
+      "key_info": [
+        "Professional Supplier of POP display accessories for Store and Supermarket",
+        "One-stop solution,Customized design Provider",
+        "Win-win Cooperate"
+      ],
+      "raw_text": "凌梦婷 shirley Shanghe JIASHAN SHANGHE DISPLAY PRODUCTS CO.,LTD +86-15268367084 Room.701,Building 9th,NO.568 East JinYang Road,Jiashan county,Zhejiang province,China shirley@jiashanghe.cn www.sh-retailsolution.com SHANGHE Win-win Cooperate Professional Supplier of POP display accessories for Store and Supermarket One-stop solution,Customized design Provider www.zjxldisplay.com https://zjxull.en.alibaba.com http://jiashanghe.en.alibaba.com",
+      "source_file": "Image (11).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (11).jfif"
+    },
+    {
+      "image_type": "company_profile",
+      "company": "JiaShan Shanghe Display",
+      "title": "Company Profile",
+      "products": [
+        {
+          "name": "POP display",
+          "model": null,
+          "specs": "retail components for all retail stores and supermarkets",
+          "category": "display"
+        },
+        {
+          "name": "data strips",
+          "model": null,
+          "specs": null,
+          "category": "retail accessories"
+        },
+        {
+          "name": "shelf pusher systems",
+          "model": null,
+          "specs": null,
+          "category": "retail accessories"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": "Jiashan, near to Shanghai and Ningbo Port"
+      },
+      "key_info": [
+        "Leading manufacturer of POP display and retail components",
+        "Established in 2000",
+        "One-stop solutions for customers",
+        "More than 12 extrusion machines, 5 injection machines and 5 bending machines",
+        "Large quantity and fast delivery capability",
+        "Convenient transport and fast delivery location"
+      ],
+      "raw_text": "SHANGHE Company Profile JiaShan Shanghe Display is a leading manufacturer of POP display and retail components for all retail stores and supermarkets. We expertize in providing one-stop solutions for customers. JiaShan Shanghe Display established in 2000,who mainly do data strips,shelf pusher systems,POP display and other accessories for supermarkets and retail stores. We have more than 12 extrusion machines, 5 injection machines and 5 bending machines to meet request for large qty and fast delivery. We located in Jiashan,which near to Shanghai and Ningbo Port,with convenient transport and fast delivery. 01 02 03 04 05 Shanghe",
+      "source_file": "Image (12).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (12).jfif"
+    },
+    {
+      "image_type": "cover",
+      "company": "Shanghe",
+      "title": "Data Studio 01 - Product Catalog Cover",
+      "products": [],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Cover shows retail store shelving with various products",
+        "Appears to be a data management or retail solutions catalog",
+        "Volume 01 indicated",
+        "Professional catalog design with hexagonal product display window"
+      ],
+      "raw_text": "Data Studio 01 Shanghe",
+      "source_file": "Image (13).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (13).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "Data Strips - Product Catalog Page",
+      "products": [
+        {
+          "name": "Data Strip",
+          "model": "BQ-01-09",
+          "specs": "53mm width, 40mm height",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-02-04",
+          "specs": "curved design with multiple segments",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-02-08",
+          "specs": "33mm x 53mm x 34mm x 46mm dimensions",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-03-04",
+          "specs": "40mm width, 13mm height",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-01-01",
+          "specs": "multiple width options: 40mm, 30mm, 33mm, 35mm, 40mm, 45mm, 50mm, 55mm, 60mm, 65mm, 70mm",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-02-01",
+          "specs": "multiple width options: 30mm, 33mm, 35mm, 40mm, 45mm, 50mm, 55mm, 60mm, 65mm, 70mm",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-02-05",
+          "specs": "curved design, 32mm dimension, 60mm width",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-03-02",
+          "specs": "multiple width options: 30mm, 33mm, 35mm, 40mm, 45mm, 50mm, 55mm, 60mm, 65mm, 70mm, 75mm",
+          "category": "data strips"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "All products appear to be data strips with various dimensions and configurations",
+        "Products include both straight and curved designs",
+        "Multiple width options available for several models",
+        "Each product shows technical drawings with precise measurements"
+      ],
+      "raw_text": "Data Strips data strips 04 BQ-01-09 53mm 40mm BQ-02-04 BQ-02-08 33mm 53mm 34mm 46mm 13mm BQ-03-04 40mm 13mm BQ-01-01 40mm 30mm 33mm 35mm 40mm 45mm 50mm 55mm 60mm 65mm 70mm BQ-02-01 30mm 33mm 35mm 40mm 45mm 50mm 55mm 60mm 65mm 70mm BQ-02-05 32mm 60mm BQ-03-02 30mm 33mm 35mm 40mm 45mm 50mm 55mm 60mm 65mm 70mm 75mm",
+      "source_file": "Image (14).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (14).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": "Strips",
+      "title": "Data Strips Product Catalog Page",
+      "products": [
+        {
+          "name": "Data Strip",
+          "model": "BQ-03-17",
+          "specs": "54mm width, 30mm height",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-03-59",
+          "specs": "50mm width",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-04-27",
+          "specs": "3mm height, 18mm width",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-05-02",
+          "specs": "4mm height",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-03-10",
+          "specs": "44mm width, 30mm height",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-03-24",
+          "specs": "30mm width, 12mm height",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-04-15",
+          "specs": "48mm width, 45mm height, 25mm dimension",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-04-28",
+          "specs": "10mm width",
+          "category": "data strips"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Various data strip models with different dimensions",
+        "Technical drawings showing cross-sectional profiles",
+        "Product photos showing actual strips with branding",
+        "Models include BQ-03 and BQ-04 series"
+      ],
+      "raw_text": "Data Strips data strips BQ-03-17 54mm 30mm BQ-03-59 50mm BQ-04-27 3mm 18mm BQ-05-02 4mm BQ-03-10 44mm 30mm BQ-03-24 30mm 12mm BQ-04-15 48mm 45mm 25mm BQ-04-28 10mm VK-28",
+      "source_file": "Image (15).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (15).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": "Shangje",
+      "title": "Data Strips - data strips product catalog page",
+      "products": [
+        {
+          "name": "Data Strip",
+          "model": "BQ-05-20",
+          "specs": "30mm dimensions shown in technical drawing",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-05-20",
+          "specs": "curved profile design",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-03-59",
+          "specs": "30mm height profile",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "YX-22",
+          "specs": "angled profile design",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-05-05",
+          "specs": "multi-channel design with 15mm, 25mm, 30mm sections",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-02-05",
+          "specs": "curved corner design, 50mm length dimension",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BQ-03-23",
+          "specs": "77mm width dimension",
+          "category": "data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "YX-28",
+          "specs": "multi-channel profile design, 15mm dimension",
+          "category": "data strips"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Page 90 of catalog",
+        "Technical drawings show cross-sectional profiles",
+        "Dimensional specifications provided for each model",
+        "Products appear to be plastic or metal extrusion profiles",
+        "Each model has accompanying technical diagram and product photo"
+      ],
+      "raw_text": "Data Strips data strips 90 BQ-05-20 30mm BQ-05-20 BQ-03-59 30mm YX-22 BQ-05-05 15mm 25mm 30mm BQ-02-05 50mm BQ-03-23 77mm YX-28 15mm Shangje",
+      "source_file": "Image (16).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (16).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "Data Strips - ESL data strips",
+      "products": [
+        {
+          "name": "Data Strip",
+          "model": "BC-08-02",
+          "specs": "Clear plastic data strip holder",
+          "category": "ESL data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BC-08-06",
+          "specs": "Blue plastic data strip holder",
+          "category": "ESL data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BC-08-01",
+          "specs": "Clear plastic data strip holder",
+          "category": "ESL data strips"
+        },
+        {
+          "name": "Data Strip",
+          "model": "BC-08-05",
+          "specs": "Clear plastic data strip holder",
+          "category": "ESL data strips"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Four different models of data strips shown",
+        "Both clear and blue colored options available",
+        "Each model includes both photo and technical drawing",
+        "Page number 07 visible"
+      ],
+      "raw_text": "Data Strips ESL data strips BC-08-02 BC-08-06 BC-08-01 BC-08-05 07",
+      "source_file": "Image (17).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (17).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "Product Display Systems - Pusher Systems",
+      "products": [
+        {
+          "name": "Pusher System",
+          "model": "8-02",
+          "specs": "Product pusher/display system",
+          "category": "retail display"
+        },
+        {
+          "name": "Pusher System",
+          "model": "8-06",
+          "specs": "Product pusher/display system",
+          "category": "retail display"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Page 08 of catalog",
+        "Shows retail product pusher systems for pharmacy/store shelving",
+        "Systems designed to push products forward on shelves",
+        "Multiple model variations available"
+      ],
+      "raw_text": "08 pusher systems hange 8-02 8-06",
+      "source_file": "Image (18).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (18).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "Pusher System - shelf pusher",
+      "products": [
+        {
+          "name": "SH-TYC-05",
+          "model": "SH-TYC-05",
+          "specs": "Material: PC+PVC, Specification: Customized length, Pusher with standard spring strength, 3N/6N/9N",
+          "category": "shelf pusher"
+        },
+        {
+          "name": "SH-TYC-11",
+          "model": "SH-TYC-11",
+          "specs": "Material: ABS+PC+PVC, Specification: 50mm wide breakable pusher for good points, Each break point: 25mm in 3N/6N/9N",
+          "category": "shelf pusher"
+        },
+        {
+          "name": "SH-TYC-01",
+          "model": "SH-TYC-01",
+          "specs": "Material: ABS, Specification: Available length in 280mm, Pusher with standard spring strengths, 3N/6N/9N",
+          "category": "shelf pusher"
+        },
+        {
+          "name": "SH-TYC-07",
+          "model": "SH-TYC-07",
+          "specs": "Material: ABS+PC+PVC, Specification: Customized length, Pusher with standard spring strengths, 3N/6N/9N",
+          "category": "shelf pusher"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Pusher System products",
+        "Various spring strengths available: 3N/6N/9N",
+        "Customizable lengths available",
+        "Different materials: PC+PVC, ABS+PC+PVC, ABS",
+        "Breakable pusher design available"
+      ],
+      "raw_text": "Pusher System shelf pusher SH-TYC-05 Material: PC+PVC Specification: Customized length Pusher with standard spring strength 3N/6N/9N SH-TYC-11 Material: ABS+PC+PVC Specification: 50mm wide breakable pusher for good points Each break point: 25mm in 3N/6N/9N SH-TYC-01 Material: ABS Specification: Available length in 280mm Pusher with standard spring strengths 3N/6N/9N SH-TYC-07 Material: ABS+PC+PVC Specification: Customized length Pusher with standard spring strengths 3N/6N/9N",
+      "source_file": "Image (19).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (19).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": "Pusher System",
+      "title": "shelf divider products",
+      "products": [
+        {
+          "name": "SH-FGB-02",
+          "model": "SH-FGB-02",
+          "specs": "Material: AS, Specification: Divider height in 120mm, length in 335mm, Breakable divider, break points every 25mm, Used for different depth sizes of shelves",
+          "category": "shelf divider"
+        },
+        {
+          "name": "SH-FGB-12",
+          "model": "SH-FGB-12",
+          "specs": "Material: AS, Specification: Divider height in 300mm, length in 260/200mm",
+          "category": "shelf divider"
+        },
+        {
+          "name": "SH-FGB-01",
+          "model": "SH-FGB-01",
+          "specs": "Material: AS, Specification: Divider height in 60mm, length in 286mm",
+          "category": "shelf divider"
+        },
+        {
+          "name": "SH-FGB-07",
+          "model": "SH-FGB-07",
+          "specs": "Material: SPC, Specification: Divider height in 60mm, length in 385/485mm, Breakable divider, break points every 25mm, Used for different depth sizes of shelves",
+          "category": "shelf divider"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "All products are shelf dividers with breakable sections",
+        "Materials used are AS (Acrylonitrile Styrene) and SPC",
+        "Various heights available: 60mm, 120mm, 300mm",
+        "Break points every 25mm for adjustable depth",
+        "Page number 10 visible"
+      ],
+      "raw_text": "Pusher System shelf divider SH-FGB-02 Material: AS Specification: Divider height in 120mm, length in 335mm, Breakable divider, break points every 25mm, Used for different depth sizes of shelves. SH-FGB-12 Material: AS Specification: Divider height in 300mm, length in 260/200mm. SH-FGB-01 Material: AS Specification: Divider height in 60mm, length in 286mm. SH-FGB-07 Material: SPC Specification: Divider height in 60mm, length in 385/485mm, Breakable divider, break points every 25mm, Used for different depth sizes of shelves. 10",
+      "source_file": "Image (20).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (20).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": "Pusher System",
+      "title": "Stopper rail product specifications",
+      "products": [
+        {
+          "name": "Stopper rail",
+          "model": "BA-025",
+          "specs": "25mm height",
+          "category": "retail display systems"
+        },
+        {
+          "name": "Stopper rail",
+          "model": "SH-XF19",
+          "specs": "35mm width, 19mm height",
+          "category": "retail display systems"
+        },
+        {
+          "name": "Stopper rail",
+          "model": "SH-XF24",
+          "specs": "47mm width, 24mm height",
+          "category": "retail display systems"
+        },
+        {
+          "name": "Stopper rail",
+          "model": "SH-XF30",
+          "specs": "52mm width, 30mm height",
+          "category": "retail display systems"
+        },
+        {
+          "name": "Stopper rail",
+          "model": "SH-XF40",
+          "specs": "52mm width, 40mm height, 12mm adhesive tape",
+          "category": "retail display systems"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Products feature technical diagrams showing dimensions",
+        "All models appear to be shelf edge retail display solutions",
+        "Products shown with actual product samples in display compartments"
+      ],
+      "raw_text": "POP Pusher System stopper rail BA-025 25mm SH-XF19 35mm 19mm SH-XF24 47mm 24mm SH-XF30 52mm 30mm SH-XF40 52mm 40mm 12mm adhesive tape",
+      "source_file": "Image (21).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (21).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "POP DISPLAY 03 - Shanghe",
+      "products": [
+        {
+          "name": "POP DISPLAY",
+          "model": "03",
+          "specs": null,
+          "category": "Display/Retail"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Shows retail store display with oranges/fruits",
+        "Part of Shanghe product catalog",
+        "Page 12 of catalog",
+        "Multiple product codes visible at bottom: BQ-02-SS, SH-YX-19, SH-YX-74, SH-YX-79, SH-YX-49"
+      ],
+      "raw_text": "POP DISPLAY 03 Shanghe 12 BQ-02-SS SH-YX-19 SH-YX-74 SH-YX-79 SH-YX-49",
+      "source_file": "Image (22).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (22).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "POP DISPLAY - Showcard Frame &accessories",
+      "products": [
+        {
+          "name": "Showcard Frame",
+          "model": "SH-SL-01",
+          "specs": null,
+          "category": "POP Display"
+        },
+        {
+          "name": "Showcard Frame",
+          "model": "SH-SL-22",
+          "specs": null,
+          "category": "POP Display"
+        },
+        {
+          "name": "Showcard Frame",
+          "model": "SH-NZL-03",
+          "specs": null,
+          "category": "POP Display"
+        },
+        {
+          "name": "Showcard Frame",
+          "model": "SH-E-05",
+          "specs": null,
+          "category": "POP Display"
+        },
+        {
+          "name": "Showcard Frame",
+          "model": "SH-FP-01",
+          "specs": "¥15.90",
+          "category": "POP Display"
+        },
+        {
+          "name": "Showcard Frame",
+          "model": "SH-POP-01",
+          "specs": null,
+          "category": "POP Display"
+        },
+        {
+          "name": "Showcard Frame",
+          "model": "SH-E-04",
+          "specs": null,
+          "category": "POP Display"
+        },
+        {
+          "name": "Showcard Frame",
+          "model": "SH-E-23",
+          "specs": null,
+          "category": "POP Display"
+        },
+        {
+          "name": "Showcard Frame",
+          "model": "SH-FP-06",
+          "specs": null,
+          "category": "POP Display"
+        },
+        {
+          "name": "Showcard Frame",
+          "model": "SH-E-03",
+          "specs": null,
+          "category": "POP Display"
+        },
+        {
+          "name": "Showcard Frame",
+          "model": "SH-E-07",
+          "specs": null,
+          "category": "POP Display"
+        },
+        {
+          "name": "Showcard Frame",
+          "model": "SH-FP-02",
+          "specs": null,
+          "category": "POP Display"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Product catalog page showing various showcard frame and accessories models",
+        "One product shows pricing: ¥15.90",
+        "Page number 13 visible at bottom"
+      ],
+      "raw_text": "POP DISPLAY showcard frame &accessories SH-SL-01 SH-SL-22 SH-NZL-03 SH-E-05 ¥15.90 SH-FP-01 SH-POP-01 SH-E-04 SH-E-23 SH-FP-06 SH-E-03 SH-E-07 SH-FP-02 13",
+      "source_file": "Image (23).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (23).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "POP DISPLAY",
+      "products": [
+        {
+          "name": "Pop Display",
+          "model": "SH-SL-17",
+          "specs": "",
+          "category": "display"
+        },
+        {
+          "name": "Pop Display",
+          "model": "SH-MZL-01",
+          "specs": "",
+          "category": "display"
+        },
+        {
+          "name": "Pop Display",
+          "model": "SH-MZL-07",
+          "specs": "",
+          "category": "display"
+        },
+        {
+          "name": "Pop Display",
+          "model": "SH-SL-10",
+          "specs": "",
+          "category": "display"
+        },
+        {
+          "name": "Pop Display",
+          "model": "SH-SL-40",
+          "specs": "",
+          "category": "display"
+        },
+        {
+          "name": "Pop Display",
+          "model": "SH-MZL-06",
+          "specs": "",
+          "category": "display"
+        },
+        {
+          "name": "Pop Display",
+          "model": "SH-SL-01",
+          "specs": "",
+          "category": "display"
+        },
+        {
+          "name": "Pop Display",
+          "model": "SH-SL-22",
+          "specs": "",
+          "category": "display"
+        },
+        {
+          "name": "Pop Display",
+          "model": "SH-MZL-03",
+          "specs": "",
+          "category": "display"
+        },
+        {
+          "name": "Pop Display",
+          "model": "SH-E-05",
+          "specs": "",
+          "category": "display"
+        },
+        {
+          "name": "Pop Display",
+          "model": "SH-FP-01",
+          "specs": "",
+          "category": "display"
+        },
+        {
+          "name": "Pop Display",
+          "model": "SH-POP-01",
+          "specs": "",
+          "category": "display"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Page 14",
+        "Pop clip accessory shown",
+        "Various display stand models with different designs"
+      ],
+      "raw_text": "POP DISPLAY pop clip 14 SH-SL-17 SH-MZL-01 SH-MZL-07 SH-SL-10 SH-SL-40 SH-MZL-06 SH-SL-01 SH-SL-22 SH-MZL-03 SH-E-05 SH-FP-01 SH-POP-01",
+      "source_file": "Image (24).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (24).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "POP DISPLAY - display stand for frame",
+      "products": [
+        {
+          "name": "Display stand for frame",
+          "model": "SH-TA-12",
+          "specs": "Pop display stand",
+          "category": "Display stands"
+        },
+        {
+          "name": "Display stand for frame",
+          "model": "SH-LD-05",
+          "specs": "Pop display stand",
+          "category": "Display stands"
+        },
+        {
+          "name": "Display stand for frame",
+          "model": "SH-CM-10",
+          "specs": "Pop display stand",
+          "category": "Display stands"
+        },
+        {
+          "name": "Display stand for frame",
+          "model": "SH-TA-04",
+          "specs": "Pop display stand with adjustable arm",
+          "category": "Display stands"
+        },
+        {
+          "name": "Display stand for frame",
+          "model": "SH-CM-07",
+          "specs": "Pop display stand with L-shaped bracket",
+          "category": "Display stands"
+        },
+        {
+          "name": "Display stand for frame",
+          "model": "SH-E-10",
+          "specs": "Pop display stand with hexagonal base",
+          "category": "Display stands"
+        },
+        {
+          "name": "Display stand for frame",
+          "model": "SH-TA-10",
+          "specs": "Pop display stand with horizontal arm",
+          "category": "Display stands"
+        },
+        {
+          "name": "Display stand for frame",
+          "model": "SH-CM-08",
+          "specs": "Pop display stand with angled bracket",
+          "category": "Display stands"
+        },
+        {
+          "name": "Display stand for frame",
+          "model": "SH-E-09",
+          "specs": "Pop display stand with geometric base",
+          "category": "Display stands"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Various pop display stand models for frames",
+        "Different mounting and bracket configurations available",
+        "Models include adjustable arms, L-shaped brackets, and geometric bases"
+      ],
+      "raw_text": "POP DISPLAY display stand for frame SH-TA-12 SH-LD-05 SH-CM-10 SH-TA-04 SH-CM-07 SH-E-10 SH-TA-10 SH-CM-08 SH-E-09 15",
+      "source_file": "Image (25).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (25).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": "Shanghe",
+      "title": "Shopping Basket 04",
+      "products": [
+        {
+          "name": "Shopping Basket",
+          "model": "04",
+          "specs": "Wire basket with handle for shopping",
+          "category": "Shopping Baskets"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Page 16 of catalog",
+        "Wire shopping basket design with metal frame",
+        "Contains fruits and vegetables in product image",
+        "Part of shopping basket product line"
+      ],
+      "raw_text": "16 Shopping Basket 04 Shanghe",
+      "source_file": "Image (26).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (26).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "Shopping Basket Product Catalog Page",
+      "products": [
+        {
+          "name": "Shopping Basket",
+          "model": "GML-02-01",
+          "specs": "Material: PP, Size: 430*300*230mm",
+          "category": "20L"
+        },
+        {
+          "name": "Shopping Basket",
+          "model": "GML-02-02",
+          "specs": "Material: PP, Size: 450*330*250mm",
+          "category": "25L"
+        },
+        {
+          "name": "Shopping Basket",
+          "model": "GML-02-03",
+          "specs": "Material: PP, Size: 540*360*330mm",
+          "category": "35L"
+        },
+        {
+          "name": "Shopping Basket",
+          "model": "GML-02-04",
+          "specs": "Material: PP, Size: 460*360*420mm",
+          "category": "35L"
+        },
+        {
+          "name": "Shopping Basket",
+          "model": "GML-02-05",
+          "specs": "Material: PP, Size: 580*340*350mm",
+          "category": "35L"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Shopping baskets available in different sizes from 20L to 35L",
+        "All baskets made from PP (polypropylene) material",
+        "Each model has specific dimensions provided",
+        "Products shown in different colors including red, blue, black"
+      ],
+      "raw_text": "Shopping Basket 20L Model:GML-02-01 Material: PP Size: 430*300*230mm 25L Model:GML-02-02 Material: PP Size: 450*330*250mm 35L Model:GML-02-03 Material: PP Size: 540*360*330mm 35L Model:GML-02-04 Material: PP Size: 460*360*420mm 35L Model:GML-02-05 Material: PP Size: 580*340*350mm 17",
+      "source_file": "Image (27).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (27).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "Display Accessories 05",
+      "products": [],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Page shows various display accessories and promotional materials",
+        "Contains basket with brochures and magazines",
+        "Shows product codes at bottom ranging from 02-01 to 340*360mm",
+        "Features hexagonal product image layout"
+      ],
+      "raw_text": "Other Display Accessories 05 hange 02-01 230mm 02-02 250mm 02-03 60*380mm 02-04 360*420mm 02-05 340*360mm",
+      "source_file": "Image (28).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (28).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "Other Display Accessories - sign gripper",
+      "products": [
+        {
+          "name": "sign gripper",
+          "model": "SH-RC-04",
+          "specs": "",
+          "category": "display accessories"
+        },
+        {
+          "name": "sign gripper",
+          "model": "SH-RC-08",
+          "specs": "",
+          "category": "display accessories"
+        },
+        {
+          "name": "sign gripper",
+          "model": "SH-RC-12",
+          "specs": "",
+          "category": "display accessories"
+        },
+        {
+          "name": "sign gripper",
+          "model": "SH-RC-14",
+          "specs": "",
+          "category": "display accessories"
+        },
+        {
+          "name": "sign gripper",
+          "model": "BL-06-22",
+          "specs": "",
+          "category": "display accessories"
+        },
+        {
+          "name": "sign gripper",
+          "model": "SH-RC-06",
+          "specs": "",
+          "category": "display accessories"
+        },
+        {
+          "name": "sign gripper",
+          "model": "SH-RC-11",
+          "specs": "",
+          "category": "display accessories"
+        },
+        {
+          "name": "sign gripper",
+          "model": "SH-RC-13",
+          "specs": "",
+          "category": "display accessories"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Display accessories catalog page showing various sign gripper models",
+        "Products shown with both technical drawings and 3D renderings"
+      ],
+      "raw_text": "Other Display Accessories sign gripper SH-RC-04 SH-RC-08 SH-RC-12 SH-RC-14 BL-06-22 SH-RC-06 SH-RC-11 SH-RC-13",
+      "source_file": "Image (29).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (29).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "Other Display Accessories - acrylic sign holder",
+      "products": [
+        {
+          "name": "acrylic sign holder",
+          "model": "SH-AK-12",
+          "specs": null,
+          "category": "display accessories"
+        },
+        {
+          "name": "acrylic sign holder",
+          "model": "SH-AK-16",
+          "specs": null,
+          "category": "display accessories"
+        },
+        {
+          "name": "acrylic sign holder",
+          "model": "SH-AK-18",
+          "specs": null,
+          "category": "display accessories"
+        },
+        {
+          "name": "acrylic sign holder",
+          "model": "SH-AK-20",
+          "specs": null,
+          "category": "display accessories"
+        },
+        {
+          "name": "acrylic sign holder",
+          "model": "SH-AK-11",
+          "specs": null,
+          "category": "display accessories"
+        },
+        {
+          "name": "acrylic sign holder",
+          "model": "SH-AK-14",
+          "specs": null,
+          "category": "display accessories"
+        },
+        {
+          "name": "acrylic sign holder",
+          "model": "SH-AK-17",
+          "specs": null,
+          "category": "display accessories"
+        },
+        {
+          "name": "acrylic sign holder",
+          "model": "SH-AK-19",
+          "specs": null,
+          "category": "display accessories"
+        },
+        {
+          "name": "acrylic sign holder",
+          "model": "SH-RC-02",
+          "specs": null,
+          "category": "display accessories"
+        },
+        {
+          "name": "acrylic sign holder",
+          "model": "SH-RC-09",
+          "specs": null,
+          "category": "display accessories"
+        },
+        {
+          "name": "acrylic sign holder",
+          "model": "SH-HC-12",
+          "specs": null,
+          "category": "display accessories"
+        },
+        {
+          "name": "acrylic sign holder",
+          "model": "SH-AC-14",
+          "specs": null,
+          "category": "display accessories"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Page 20 of catalog",
+        "Various acrylic sign holder designs including angled, flat, cube-shaped, and multi-fold configurations",
+        "Products shown with both technical drawings and actual photos"
+      ],
+      "raw_text": "Other Display Accessories acrylic sign holder SH-AK-12 SH-AK-16 SH-AK-18 SH-AK-20 SH-AK-11 SH-AK-14 SH-AK-17 SH-AK-19 SH-RC-02 SH-RC-09 SH-HC-12 SH-AC-14 20",
+      "source_file": "Image (30).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (30).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "Other Display Accessories - Clip strips",
+      "products": [
+        {
+          "name": "Plastic clip strip",
+          "model": "SH-GT-01",
+          "specs": "Plastic material with multiple clip attachments",
+          "category": "clip strips"
+        },
+        {
+          "name": "Clip strip",
+          "model": "SH-GT-02",
+          "specs": "Linear strip with multiple attachment points",
+          "category": "clip strips"
+        },
+        {
+          "name": "Clip strip",
+          "model": "SH-GT-03",
+          "specs": "Single strip with clip attachment",
+          "category": "clip strips"
+        },
+        {
+          "name": "Clip strip",
+          "model": "SH-GT-04",
+          "specs": "Multi-line parallel strip configuration",
+          "category": "clip strips"
+        },
+        {
+          "name": "Clip strip",
+          "model": "SH-GT-05",
+          "specs": "Angled strip with multiple clips",
+          "category": "clip strips"
+        },
+        {
+          "name": "Metal clip strip",
+          "model": "SH-GT-06",
+          "specs": "Metal construction with linear design",
+          "category": "clip strips"
+        },
+        {
+          "name": "Clip strip",
+          "model": "SH-GT-07",
+          "specs": "Cross-pattern strip configuration",
+          "category": "clip strips"
+        },
+        {
+          "name": "Clip strip",
+          "model": "SH-GT-08",
+          "specs": "Angular mounting strip",
+          "category": "clip strips"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Page 21 of catalog",
+        "Iron brand logo visible on some products",
+        "Various clip strip configurations available",
+        "Both plastic and metal options offered"
+      ],
+      "raw_text": "Other Display Accessories clip strips Plastic clip strip SH-GT-01 SH-GT-02 SH-GT-03 SH-GT-04 SH-GT-05 Metal clip strip SH-GT-06 Iron SH-GT-07 SH-GT-08 Iron 21",
+      "source_file": "Image (31).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (31).jfif"
+    },
+    {
+      "image_type": "product_page",
+      "company": null,
+      "title": "Other Display Accessories - fruit&vegetable display",
+      "products": [
+        {
+          "name": "SH-DK-01",
+          "model": "SH-DK-01",
+          "specs": "Material: PP, Size: 600*400*140mm",
+          "category": "fruit&vegetable display"
+        },
+        {
+          "name": "SH-DK-02",
+          "model": "SH-DK-02",
+          "specs": "Material: PP, Size: 600*400*180mm",
+          "category": "fruit&vegetable display"
+        },
+        {
+          "name": "SH-DK-03",
+          "model": "SH-DK-03",
+          "specs": "Material: PP, Size: 600*400*220mm",
+          "category": "fruit&vegetable display"
+        },
+        {
+          "name": "SH-DK-04",
+          "model": "SH-DK-04",
+          "specs": "Material: PP, Size: 600*400*260mm",
+          "category": "fruit&vegetable display"
+        },
+        {
+          "name": "SH-DK-05",
+          "model": "SH-DK-05",
+          "specs": "Material: PP, Size: 600*400*300mm",
+          "category": "fruit&vegetable display"
+        }
+      ],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "All products are foldable displays with open and fold configurations shown",
+        "Products have consistent width and depth (600mm x 400mm) with varying heights",
+        "All made from PP (polypropylene) material",
+        "Page number 22 visible"
+      ],
+      "raw_text": "Other Display Accessories fruit&vegetable display fold open SH-DK-01 Material: PP Size: 600*400*140mm SH-DK-02 Material: PP Size: 600*400*180mm SH-DK-03 Material: PP Size: 600*400*220mm SH-DK-04 Material: PP Size: 600*400*260mm SH-DK-05 Material: PP Size: 600*400*300mm 22",
+      "source_file": "Image (32).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (32).jfif"
+    },
+    {
+      "image_type": "cover",
+      "company": "hanghe",
+      "title": "Company catalog or brochure cover",
+      "products": [],
+      "contact": {
+        "person": null,
+        "phone": null,
+        "email": null,
+        "website": null,
+        "address": null
+      },
+      "key_info": [
+        "Company logo features red and blue curved design elements",
+        "Clean minimalist cover design",
+        "Appears to be a product catalog or company brochure"
+      ],
+      "raw_text": "hanghe",
+      "source_file": "Image (33).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (33).jfif"
+    },
+    {
+      "image_type": "contact_page",
+      "company": "Jianghe",
+      "title": "Company Contact Information",
+      "products": [],
+      "contact": {
+        "person": null,
+        "phone": "+86-579-84681685",
+        "email": null,
+        "website": "www.jiangheaby.com",
+        "address": "Add: 2nd Floor,Building A,No.6 ChengGang Road, Jinhua Street, Jinhua City, Zhejiang Province,China"
+      },
+      "key_info": [
+        "Tel: +86-579-84681685",
+        "Website: www.jiangheaby.com",
+        "Http://jiangheaby.en.alibaba.com"
+      ],
+      "raw_text": "Jianghe Tel: +86-579-84681685 Add: 2nd Floor,Building A,No.6 ChengGang Road, Jinhua Street, Jinhua City, Zhejiang Province,China Website: www.jiangheaby.com Http://jiangheaby.en.alibaba.com",
+      "source_file": "Image (34).jfif",
+      "source_path": "/Users/rahulgupta/Desktop/CityAI-Final-Project/City-KONTACT/data/uploads/Paper3/Image (34).jfif"
+    }
+  ]
+}
