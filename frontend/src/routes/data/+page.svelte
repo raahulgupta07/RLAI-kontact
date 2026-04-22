@@ -241,6 +241,14 @@
                 <h3 class="card-title">{doc.title || doc.source_file || 'Untitled'}</h3>
                 {#if doc.company}<p class="card-company">{doc.company}</p>{/if}
                 <p class="card-source">{doc.source_file} · {doc.folder}</p>
+                <div class="card-meta-row">
+                  {#if doc.img_width && doc.img_height}<span class="meta-tag">{doc.img_width}x{doc.img_height}</span>{/if}
+                  {#if doc.file_size_kb}<span class="meta-tag">{doc.file_size_kb} KB</span>{/if}
+                  {#if doc.uuid}<span class="meta-tag uuid">{doc.uuid.slice(0, 8)}</span>{/if}
+                  {#if doc.gps_lat && doc.gps_lng}<span class="meta-tag gps">{doc.gps_lat}, {doc.gps_lng}</span>{/if}
+                  {#if doc.date_taken}<span class="meta-tag">{doc.date_taken}</span>{/if}
+                  {#if doc.camera_make}<span class="meta-tag">{doc.camera_make} {doc.camera_model || ''}</span>{/if}
+                </div>
                 {#if doc.created_at}
                   <p class="card-timestamp">{formatTimestamp(doc.created_at)}</p>
                 {/if}
@@ -260,6 +268,22 @@
                 <button class="action-btn" onclick={() => saveJson(doc)}>
                   SAVE JSON
                 </button>
+              </div>
+
+              <!-- Metadata -->
+              <div class="detail-section">
+                <h4>File Info</h4>
+                <div class="meta-grid">
+                  {#if doc.uuid}<div class="meta-item"><span class="meta-label">UUID</span><span class="meta-value">{doc.uuid}</span></div>{/if}
+                  {#if doc.img_width}<div class="meta-item"><span class="meta-label">Dimensions</span><span class="meta-value">{doc.img_width} x {doc.img_height} px</span></div>{/if}
+                  {#if doc.file_size_kb}<div class="meta-item"><span class="meta-label">File Size</span><span class="meta-value">{doc.file_size_kb} KB</span></div>{/if}
+                  {#if doc.gps_lat && doc.gps_lng}<div class="meta-item"><span class="meta-label">GPS Location</span><span class="meta-value">{doc.gps_lat}, {doc.gps_lng}</span></div>{/if}
+                  {#if doc.date_taken}<div class="meta-item"><span class="meta-label">Date Taken</span><span class="meta-value">{doc.date_taken}</span></div>{/if}
+                  {#if doc.camera_make}<div class="meta-item"><span class="meta-label">Camera</span><span class="meta-value">{doc.camera_make} {doc.camera_model || ''}</span></div>{/if}
+                  {#if doc.created_at}<div class="meta-item"><span class="meta-label">Imported</span><span class="meta-value">{formatTimestamp(doc.created_at)}</span></div>{/if}
+                  <div class="meta-item"><span class="meta-label">Folder</span><span class="meta-value">{doc.folder}</span></div>
+                  <div class="meta-item"><span class="meta-label">Type</span><span class="meta-value">{doc.image_type}</span></div>
+                </div>
               </div>
 
               <!-- Products -->
@@ -638,5 +662,62 @@
     line-height: 1.4;
     white-space: pre-wrap;
     word-break: break-all;
+  }
+
+  /* Metadata tags on card header */
+  .card-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .meta-tag {
+    font-size: 0.55rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    background: var(--color-surface-dim);
+    border: 1px solid var(--color-on-surface);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-family: 'Space Grotesk', monospace;
+    color: var(--color-on-surface-dim);
+  }
+  .meta-tag.uuid { color: #7c3aed; border-color: #7c3aed; }
+  .meta-tag.gps { color: #16a34a; border-color: #16a34a; background: #dcfce7; }
+
+  .card-timestamp {
+    margin: 3px 0 0;
+    font-size: 0.6rem;
+    color: #999;
+  }
+
+  /* Metadata grid in expanded details */
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding: 4px 6px;
+    background: var(--color-surface-dim);
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+  .meta-label {
+    font-size: 0.55rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-on-surface-dim);
+  }
+  .meta-value {
+    font-size: 0.75rem;
+    font-family: 'Space Grotesk', monospace;
+    word-break: break-all;
+  }
+  @media (max-width: 640px) {
+    .meta-grid { grid-template-columns: 1fr; }
   }
 </style>
