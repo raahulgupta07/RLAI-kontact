@@ -19,6 +19,7 @@
   let chatContainer = $state(null);
   let textareaEl = $state(null);
   let copiedIdx = $state(-1);
+  let feedbackState = $state({});
 
   function getTimestamp() { return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); }
   function timeAgo(dateStr) {
@@ -50,6 +51,24 @@
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a'); a.href = url; a.download = `kontact-chat-${new Date().toISOString().slice(0,10)}.md`; a.click(); URL.revokeObjectURL(url);
   }
+  async function submitFeedback(idx, rating) {
+    if (feedbackState[idx]) return;
+    const msg = messages[idx];
+    // Find the preceding user message
+    let question = '';
+    for (let i = idx - 1; i >= 0; i--) {
+      if (messages[i].role === 'user') { question = messages[i].content; break; }
+    }
+    try {
+      await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ session_id: sessionId || '', question, answer: msg.content, rating })
+      });
+      feedbackState = { ...feedbackState, [idx]: rating };
+    } catch (err) { console.error('Feedback error:', err); }
+  }
+
   function extractSuggestions(answer) {
     const lower = answer.toLowerCase();
     const suggestions = [];
@@ -260,8 +279,8 @@
             <div class="action-bar">
               <div class="action-left">
                 <span class="action-label">HELPFUL?</span>
-                <button class="action-btn" title="Yes" aria-label="Helpful"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg></button>
-                <button class="action-btn" title="No" aria-label="Not helpful"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"/></svg></button>
+                <button class="action-btn" class:feedback-active={feedbackState[idx] === 'up'} title="Yes" aria-label="Helpful" disabled={!!feedbackState[idx]} onclick={() => submitFeedback(idx, 'up')}><svg width="14" height="14" viewBox="0 0 24 24" fill={feedbackState[idx] === 'up' ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg></button>
+                <button class="action-btn" class:feedback-active={feedbackState[idx] === 'down'} title="No" aria-label="Not helpful" disabled={!!feedbackState[idx]} onclick={() => submitFeedback(idx, 'down')}><svg width="14" height="14" viewBox="0 0 24 24" fill={feedbackState[idx] === 'down' ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"/></svg></button>
               </div>
               <div class="action-right">
                 <button class="action-btn-label" aria-label="Copy response" onclick={() => copyText(msg.content, idx)}><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="0"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>{copiedIdx === idx ? 'COPIED' : 'COPY'}</button>
@@ -412,7 +431,9 @@
   .action-left { display:flex; align-items:center; gap:6px; } .action-right { display:flex; align-items:center; gap:4px; }
   .action-label { font-size:0.6rem; font-weight:700; color:var(--color-on-surface-dim); letter-spacing:0.06em; text-transform:uppercase; }
   .action-btn { background:none; border:1px solid var(--color-on-surface); padding:4px 6px; cursor:pointer; min-height:28px; display:flex; align-items:center; color:var(--color-on-surface-dim); }
-  .action-btn:hover { background:var(--color-surface-dim); color:var(--color-on-surface); }
+  .action-btn:hover:not(:disabled) { background:var(--color-surface-dim); color:var(--color-on-surface); }
+  .action-btn:disabled { opacity:0.5; cursor:not-allowed; }
+  .action-btn.feedback-active { background:var(--color-primary); color:var(--color-on-surface); border-color:var(--color-primary); opacity:1; }
   .action-btn-label { font-family:'Space Grotesk',sans-serif; font-size:0.6rem; font-weight:700; padding:4px 10px; border:1px solid var(--color-on-surface); background:none; cursor:pointer; text-transform:uppercase; letter-spacing:0.04em; color:var(--color-on-surface-dim); min-height:28px; display:inline-flex; align-items:center; gap:4px; }
   .action-btn-label:hover { background:var(--color-on-surface); color:var(--color-surface); }
   .action-btn-label:hover svg { stroke:var(--color-surface); }

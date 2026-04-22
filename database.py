@@ -250,6 +250,15 @@ def queue_status(batch_id: str = None) -> dict:
     return {"total": total, **breakdown}
 
 
+def delete_batch(batch_id: str) -> int:
+    c = _conn()
+    queue_deleted = c.execute("DELETE FROM queue WHERE batch_id = ?", (batch_id,)).rowcount
+    doc_deleted = c.execute("DELETE FROM documents WHERE folder = ?", (batch_id,)).rowcount
+    c.commit()
+    c.close()
+    return queue_deleted + doc_deleted
+
+
 def queue_batches() -> list:
     c = _conn()
     rows = c.execute("""
@@ -262,6 +271,103 @@ def queue_batches() -> list:
     """).fetchall()
     c.close()
     return [dict(r) for r in rows]
+
+
+def get_all_contacts() -> list:
+    """Parse contact JSON from all documents and return a flat list of contacts."""
+    c = _conn()
+    rows = c.execute("SELECT folder, source_file, contact FROM documents ORDER BY folder, source_file").fetchall()
+    c.close()
+    contacts = []
+    for r in rows:
+        raw = r["contact"]
+        if not raw:
+            continue
+        try:
+            ct = json.loads(raw) if isinstance(raw, str) else raw
+        except Exception:
+            continue
+        if not isinstance(ct, dict):
+            continue
+        company = ct.get("company", "") or ""
+        person = ct.get("person", "") or ""
+        phone = ct.get("phone", "") or ""
+        email = ct.get("email", "") or ""
+        website = ct.get("website", "") or ""
+        address = ct.get("address", "") or ""
+        # Skip if all contact fields are empty
+        if not any([company, person, phone, email, website, address]):
+            continue
+        contacts.append({
+            "company": company,
+            "person": person,
+            "phone": phone,
+            "email": email,
+            "website": website,
+            "address": address,
+            "folder": r["folder"],
+            "source_file": r["source_file"],
+        })
+    return contacts
+
+
+def get_dashboard_stats() -> dict:
+    """Return rich dashboard statistics."""
+    c = _conn()
+    total_documents = c.execute("SELECT COUNT(*) FROM documents").fetchone()[0]
+
+    # Count products by parsing JSON
+    rows = c.execute("SELECT folder, company, products FROM documents ORDER BY folder, company").fetchall()
+    total_products = 0
+    company_map = {}  # company -> {doc_count, product_count}
+    for r in rows:
+        company = r["company"] or "Unknown"
+        if company not in company_map:
+            company_map[company] = {"doc_count": 0, "product_count": 0}
+        company_map[company]["doc_count"] += 1
+        prods = r["products"]
+        if prods:
+            try:
+                p = json.loads(prods) if isinstance(prods, str) else prods
+                if isinstance(p, list):
+                    total_products += len(p)
+                    company_map[company]["product_count"] += len(p)
+            except Exception:
+                pass
+
+    companies_with_counts = [
+        {"company": k, "doc_count": v["doc_count"], "product_count": v["product_count"]}
+        for k, v in sorted(company_map.items())
+    ]
+
+    # Type breakdown
+    type_rows = c.execute(
+        "SELECT image_type, COUNT(*) as cnt FROM documents GROUP BY image_type ORDER BY cnt DESC"
+    ).fetchall()
+    type_breakdown = [{"image_type": r["image_type"] or "unknown", "count": r["cnt"]} for r in type_rows]
+
+    # Folder breakdown
+    folder_rows = c.execute(
+        "SELECT folder, COUNT(*) as cnt FROM documents GROUP BY folder ORDER BY cnt DESC"
+    ).fetchall()
+    folder_breakdown = [{"folder": r["folder"], "count": r["cnt"]} for r in folder_rows]
+
+    # Recent uploads (last 5 queue items)
+    recent_rows = c.execute(
+        "SELECT id, batch_id, file_name, status, image_type, created_at, processed_at "
+        "FROM queue ORDER BY id DESC LIMIT 5"
+    ).fetchall()
+    recent_uploads = [dict(r) for r in recent_rows]
+
+    c.close()
+    return {
+        "total_documents": total_documents,
+        "total_products": total_products,
+        "companies_with_counts": companies_with_counts,
+        "type_breakdown": type_breakdown,
+        "folder_breakdown": folder_breakdown,
+        "recent_uploads": recent_uploads,
+    }
 
 
 def export_all() -> list:

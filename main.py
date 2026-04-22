@@ -43,8 +43,24 @@ async def upload_images(files: list[UploadFile] = File(...), batch_id: str = For
         dest = os.path.join(batch_dir, f.filename)
         with open(dest, "wb") as out:
             shutil.copyfileobj(f.file, out)
-        db.queue_add(batch_id, f.filename, dest)
-        queued.append(f.filename)
+        if ext == ".pdf":
+            # Convert PDF pages to individual JPEG images
+            import fitz
+            from PIL import Image as PILImage
+            doc = fitz.open(dest)
+            base_name = os.path.splitext(f.filename)[0]
+            for i, page in enumerate(doc, start=1):
+                pix = page.get_pixmap(dpi=200)
+                img = PILImage.frombytes("RGB", [pix.width, pix.height], pix.samples)
+                page_name = f"{base_name}_page{i}.jpg"
+                page_dest = os.path.join(batch_dir, page_name)
+                img.save(page_dest, format="JPEG", quality=90)
+                db.queue_add(batch_id, page_name, page_dest)
+                queued.append(page_name)
+            doc.close()
+        else:
+            db.queue_add(batch_id, f.filename, dest)
+            queued.append(f.filename)
 
     # Auto-process in background after upload
     if queued:
@@ -94,6 +110,14 @@ def retry_queue_item(queue_id: int):
     if not success:
         raise HTTPException(404, "Item not found or not in error state")
     return {"retried": queue_id}
+
+
+@app.delete("/api/batch/{batch_id}")
+def delete_batch(batch_id: str):
+    count = db.delete_batch(batch_id)
+    if count == 0:
+        raise HTTPException(404, "Batch not found")
+    return {"deleted": batch_id, "count": count}
 
 
 @app.get("/api/queue/pending")
@@ -229,6 +253,93 @@ def delete_chat_session(session_id: str):
 def export_json():
     data = db.export_all()
     return JSONResponse(content=data, headers={"Content-Disposition": "attachment; filename=kontact_export.json"})
+
+
+@app.get("/api/contacts")
+def get_contacts():
+    return db.get_all_contacts()
+
+
+@app.get("/api/dashboard")
+def dashboard():
+    return db.get_dashboard_stats()
+
+
+@app.get("/api/export/xlsx")
+def export_xlsx():
+    from openpyxl import Workbook
+    data = db.export_all()
+    if not data:
+        raise HTTPException(404, "No data")
+
+    wb = Workbook()
+
+    # Sheet 1: Products
+    ws_prod = wb.active
+    ws_prod.title = "Products"
+    prod_headers = ["company", "product_name", "model", "specs", "category", "price", "folder", "source_file"]
+    ws_prod.append(prod_headers)
+    for row in data:
+        prods = row.get("products", [])
+        if isinstance(prods, str):
+            try:
+                prods = json.loads(prods)
+            except Exception:
+                prods = []
+        if not isinstance(prods, list):
+            continue
+        for p in prods:
+            if not isinstance(p, dict):
+                continue
+            ws_prod.append([
+                p.get("company", "") or row.get("company", ""),
+                p.get("product_name", "") or p.get("name", ""),
+                p.get("model", ""),
+                p.get("specs", "") if isinstance(p.get("specs"), str) else json.dumps(p.get("specs", ""), ensure_ascii=False),
+                p.get("category", ""),
+                p.get("price", ""),
+                row.get("folder", ""),
+                row.get("source_file", ""),
+            ])
+
+    # Sheet 2: Contacts
+    ws_cont = wb.create_sheet("Contacts")
+    cont_headers = ["company", "person", "phone", "email", "website", "address", "folder"]
+    ws_cont.append(cont_headers)
+    contacts = db.get_all_contacts()
+    for ct in contacts:
+        ws_cont.append([ct.get(h, "") for h in cont_headers])
+
+    # Sheet 3: Summary
+    ws_sum = wb.create_sheet("Summary")
+    sum_headers = ["company", "document_count", "product_count", "has_contact"]
+    ws_sum.append(sum_headers)
+    company_info = {}
+    contact_companies = {ct["company"] for ct in contacts if ct.get("company")}
+    for row in data:
+        comp = row.get("company", "") or "Unknown"
+        if comp not in company_info:
+            company_info[comp] = {"doc_count": 0, "prod_count": 0}
+        company_info[comp]["doc_count"] += 1
+        prods = row.get("products", [])
+        if isinstance(prods, str):
+            try:
+                prods = json.loads(prods)
+            except Exception:
+                prods = []
+        if isinstance(prods, list):
+            company_info[comp]["prod_count"] += len(prods)
+    for comp, info in sorted(company_info.items()):
+        ws_sum.append([comp, info["doc_count"], info["prod_count"], "Yes" if comp in contact_companies else "No"])
+
+    output = io.BytesIO()
+    wb.save(output)
+    output.seek(0)
+    return StreamingResponse(
+        output,
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": "attachment; filename=kontact_export.xlsx"},
+    )
 
 
 @app.get("/api/export/csv")

@@ -13,13 +13,15 @@
   let showTerminal = $state(false);
   let expandedBatch = $state(null);
   let expandedData = $state([]);
+  let toast = $state(null);
 
   const api = {
     async getQueueBatches() { const r = await fetch('/api/queue/batches'); return r.json(); },
     async processQueue(bid = null) { const r = await fetch(bid ? `/api/process/background?batch_id=${bid}` : '/api/process/background', { method: 'POST' }); if (!r.ok) { const e = await r.json().catch(() => ({ detail: 'Failed' })); throw new Error(e.detail); } return r.json(); },
     async getQueueStatus(bid = null) { const r = await fetch(bid ? `/api/queue?batch_id=${bid}` : '/api/queue'); return r.json(); },
     async getQueueErrors(bid = null) { const r = await fetch(bid ? `/api/queue/errors?batch_id=${bid}` : '/api/queue/errors'); return r.ok ? r.json() : []; },
-    async retryItem(qid) { const r = await fetch(`/api/queue/retry/${qid}`, { method: 'POST' }); if (!r.ok) throw new Error('Retry failed'); return r.json(); }
+    async retryItem(qid) { const r = await fetch(`/api/queue/retry/${qid}`, { method: 'POST' }); if (!r.ok) throw new Error('Retry failed'); return r.json(); },
+    async deleteBatch(bid) { const r = await fetch(`/api/batch/${bid}`, { method: 'DELETE' }); if (!r.ok) { const e = await r.json().catch(() => ({ detail: 'Failed' })); throw new Error(e.detail); } return r.json(); }
   };
 
   async function fetchBatches() { loading = true; try { batches = await api.getQueueBatches(); } catch (e) { log(`ERROR: ${e.message}`); } finally { loading = false; } }
@@ -44,15 +46,32 @@
     } catch (e) { log(`ERROR: ${e.message}`); processing = false; activeBatch = null; }
   }
 
+  function showToast(message) {
+    toast = message;
+    setTimeout(() => { toast = null; }, 5000);
+  }
+
+  async function deleteBatch(bid) {
+    if (!confirm('Delete batch?')) return;
+    try { await api.deleteBatch(bid); log(`Deleted batch [${bid}]`); await fetchBatches(); } catch (e) { log(`ERROR: ${e.message}`); }
+  }
+
   function startPolling(bid = null) {
     if (pollTimer) clearInterval(pollTimer);
     pollTimer = setInterval(async () => {
       const status = await api.getQueueStatus(bid);
       const items = Array.isArray(status) ? status : [status];
       const pending = items.filter(i => i.status === 'pending').length;
-      log(`${items.filter(i=>i.status==='done').length} done, ${pending} pending`);
+      const doneCount = items.filter(i=>i.status==='done').length;
+      log(`${doneCount} done, ${pending} pending`);
       await fetchBatches();
-      if (pending === 0) { clearInterval(pollTimer); pollTimer = null; log('Complete.'); processing = false; activeBatch = null; }
+      if (pending === 0) {
+        clearInterval(pollTimer); pollTimer = null; log('Complete.'); processing = false;
+        const batchName = activeBatch || 'All';
+        const totalDone = status.done ?? doneCount;
+        showToast(`Batch ${batchName} processed successfully! ${totalDone} images done.`);
+        activeBatch = null;
+      }
     }, 3000);
   }
 
@@ -96,6 +115,9 @@
 <svelte:head><title>QUEUE | KONTACT</title></svelte:head>
 
 <div class="q-page">
+  {#if toast}
+    <div class="q-toast">{toast}</div>
+  {/if}
   <div class="q-header">
     <div class="q-title-row">
       <h1>QUEUE</h1>
@@ -150,6 +172,7 @@
                   <button class="q-btn-sm q-btn-error" onclick={() => toggleErrors(batch.batch_id)}>{expandedErrors[batch.batch_id] ? 'HIDE' : 'ERRORS'}</button>
                 {/if}
                 <button class="q-btn-sm q-btn-outline" onclick={() => toggleExpand(batch.batch_id)}>{expandedBatch === batch.batch_id ? 'COLLAPSE' : 'EXPAND'}</button>
+                <button class="q-btn-sm q-btn-delete" onclick={() => deleteBatch(batch.batch_id)} title="Delete batch">&times;</button>
               </div>
             </div>
           </div>
@@ -345,6 +368,14 @@
   .q-terminal-line { white-space:pre-wrap; }
   .q-blink { animation:qblink 1s step-end infinite; }
   @keyframes qblink { 50% { opacity:0; } }
+
+  /* Toast */
+  .q-toast { position:fixed; top:16px; left:50%; transform:translateX(-50%); background:#16a34a; color:#fff; padding:10px 24px; font-size:0.8rem; font-weight:700; letter-spacing:0.04em; z-index:9999; box-shadow:0 4px 12px rgba(0,0,0,0.2); animation:q-toast-in 0.3s ease-out; }
+  @keyframes q-toast-in { from { opacity:0; transform:translateX(-50%) translateY(-12px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }
+
+  /* Delete button */
+  .q-btn-sm.q-btn-delete { border-color:#dc2626; color:#dc2626; font-size:0.85rem; font-weight:900; padding:3px 8px; line-height:1; }
+  .q-btn-sm.q-btn-delete:hover:not(:disabled) { background:#dc2626; color:#fff; }
 
   /* Empty */
   .q-empty { display:flex; flex-direction:column; align-items:center; gap:12px; padding:48px 16px; text-align:center; color:var(--color-on-surface-dim); }

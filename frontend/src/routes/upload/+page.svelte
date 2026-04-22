@@ -41,7 +41,7 @@
 
   function handleDrop(event) {
     event.preventDefault();
-    const dropped = Array.from(event.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+    const dropped = Array.from(event.dataTransfer.files).filter(f => f.type.startsWith('image/') || f.type === 'application/pdf');
     files = [...files, ...dropped];
     checkImageQuality(dropped);
   }
@@ -153,14 +153,14 @@
       tabindex="0"
     >
       <div class="drop-icon">&#128247;</div>
-      <p class="drop-label">TAP TO TAKE PHOTO<br/>OR SELECT IMAGES</p>
+      <p class="drop-label">TAP TO TAKE PHOTO<br/>OR SELECT IMAGES / PDFs</p>
       <p class="drop-hint">drop files here on desktop</p>
     </div>
 
     <input
       bind:this={fileInput}
       type="file"
-      accept="image/*,.jfif,.heic,.heif,.webp,.bmp,.tiff,.avif,image/jpeg,image/png,image/gif,image/webp,image/heic,image/heif,image/avif,image/bmp,image/tiff"
+      accept="image/*,.jfif,.heic,.heif,.webp,.bmp,.tiff,.avif,.pdf,image/jpeg,image/png,image/gif,image/webp,image/heic,image/heif,image/avif,image/bmp,image/tiff,application/pdf"
       multiple
       onchange={handleFiles}
       class="file-input-hidden"
@@ -208,7 +208,7 @@
       {#if uploading === 'uploading'}
         UPLOADING...
       {:else}
-        UPLOAD {files.length} IMAGE{files.length !== 1 ? 'S' : ''}
+        UPLOAD {files.length} FILE{files.length !== 1 ? 'S' : ''}
       {/if}
     </button>
 
