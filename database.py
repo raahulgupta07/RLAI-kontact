@@ -1,4 +1,5 @@
 import sqlite3, json, os
+from uuid import uuid4
 import config
 
 DB_PATH = os.path.join(config.DATA_DIR, "kontact.db")
@@ -62,16 +63,58 @@ def init_db():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             processed_at TIMESTAMP
         );
+        CREATE TABLE IF NOT EXISTS products (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            uuid TEXT NOT NULL UNIQUE,
+            document_uuid TEXT,
+            document_id INTEGER,
+            folder TEXT,
+            source_file TEXT,
+            company TEXT,
+            name TEXT,
+            model TEXT,
+            specs TEXT,
+            category TEXT,
+            price TEXT,
+            image_desc TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (document_id) REFERENCES documents(id)
+        );
+        CREATE TABLE IF NOT EXISTS contacts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            uuid TEXT NOT NULL UNIQUE,
+            document_uuid TEXT,
+            document_id INTEGER,
+            folder TEXT,
+            source_file TEXT,
+            company TEXT,
+            person TEXT,
+            phone TEXT,
+            email TEXT,
+            website TEXT,
+            address TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (document_id) REFERENCES documents(id)
+        );
     """)
+
+    # Add uuid column to documents if not exists (SQLite has no IF NOT EXISTS for ALTER)
+    try:
+        c.execute("ALTER TABLE documents ADD COLUMN uuid TEXT")
+        c.commit()
+    except Exception:
+        pass  # Column already exists
+
     c.close()
 
 
 def insert_extraction(folder: str, record: dict):
     c = _conn()
+    doc_uuid = str(uuid4())
     c.execute("""
         INSERT OR REPLACE INTO documents
-        (folder, source_file, source_path, image_type, company, title, products, contact, key_info, raw_text, full_json)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (folder, source_file, source_path, image_type, company, title, products, contact, key_info, raw_text, full_json, uuid)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         folder,
         record.get("source_file", ""),
@@ -84,7 +127,69 @@ def insert_extraction(folder: str, record: dict):
         json.dumps(record.get("key_info", []), ensure_ascii=False),
         record.get("raw_text", ""),
         json.dumps(record, ensure_ascii=False),
+        doc_uuid,
     ))
+    doc_id = c.execute("SELECT id FROM documents WHERE folder = ? AND source_file = ?",
+                       (folder, record.get("source_file", ""))).fetchone()
+    doc_id = doc_id[0] if doc_id else None
+    source_file = record.get("source_file", "")
+    company = record.get("company", "")
+
+    # Insert products into normalized table
+    products = record.get("products", [])
+    if isinstance(products, str):
+        try:
+            products = json.loads(products)
+        except Exception:
+            products = []
+    if isinstance(products, list):
+        for p in products:
+            if not isinstance(p, dict):
+                continue
+            p_name = p.get("product_name", "") or p.get("name", "")
+            specs_val = p.get("specs", "")
+            if not isinstance(specs_val, str):
+                specs_val = json.dumps(specs_val, ensure_ascii=False)
+            try:
+                c.execute("""
+                    INSERT INTO products (uuid, document_uuid, document_id, folder, source_file, company, name, model, specs, category, price, image_desc)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    str(uuid4()), doc_uuid, doc_id, folder, source_file,
+                    p.get("company", "") or company,
+                    p_name, p.get("model", ""), specs_val,
+                    p.get("category", ""), p.get("price", ""),
+                    p.get("image_desc", "") or p.get("description", ""),
+                ))
+            except Exception:
+                pass  # Skip duplicates
+
+    # Insert contact into normalized table
+    contact = record.get("contact", {})
+    if isinstance(contact, str):
+        try:
+            contact = json.loads(contact)
+        except Exception:
+            contact = {}
+    if isinstance(contact, dict):
+        ct_company = contact.get("company", "") or ""
+        ct_person = contact.get("person", "") or ""
+        ct_phone = contact.get("phone", "") or ""
+        ct_email = contact.get("email", "") or ""
+        ct_website = contact.get("website", "") or ""
+        ct_address = contact.get("address", "") or ""
+        if any([ct_company, ct_person, ct_phone, ct_email, ct_website, ct_address]):
+            try:
+                c.execute("""
+                    INSERT INTO contacts (uuid, document_uuid, document_id, folder, source_file, company, person, phone, email, website, address)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    str(uuid4()), doc_uuid, doc_id, folder, source_file,
+                    ct_company, ct_person, ct_phone, ct_email, ct_website, ct_address,
+                ))
+            except Exception:
+                pass
+
     c.commit()
     c.close()
 
@@ -387,4 +492,103 @@ def export_all() -> list:
     return results
 
 
+def populate_normalized_tables() -> dict:
+    """Migrate existing documents into the normalized products and contacts tables."""
+    c = _conn()
+    # Only process documents that don't yet have a uuid (i.e., not yet migrated)
+    rows = c.execute("SELECT * FROM documents WHERE uuid IS NULL").fetchall()
+    products_added = 0
+    contacts_added = 0
+
+    for row in rows:
+        doc_id = row["id"]
+        folder = row["folder"]
+        source_file = row["source_file"]
+        company = row["company"] or ""
+
+        # Assign uuid to document
+        doc_uuid = None
+        if not doc_uuid:
+            doc_uuid = str(uuid4())
+            c.execute("UPDATE documents SET uuid = ? WHERE id = ?", (doc_uuid, doc_id))
+
+        # Parse and insert products
+        raw_products = row["products"]
+        if raw_products:
+            try:
+                products = json.loads(raw_products) if isinstance(raw_products, str) else raw_products
+            except Exception:
+                products = []
+            if isinstance(products, list):
+                for p in products:
+                    if not isinstance(p, dict):
+                        continue
+                    p_name = p.get("product_name", "") or p.get("name", "")
+                    specs_val = p.get("specs", "")
+                    if not isinstance(specs_val, str):
+                        specs_val = json.dumps(specs_val, ensure_ascii=False)
+                    try:
+                        c.execute("""
+                            INSERT INTO products (uuid, document_uuid, document_id, folder, source_file, company, name, model, specs, category, price, image_desc)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        """, (
+                            str(uuid4()), doc_uuid, doc_id, folder, source_file,
+                            p.get("company", "") or company,
+                            p_name, p.get("model", ""), specs_val,
+                            p.get("category", ""), p.get("price", ""),
+                            p.get("image_desc", "") or p.get("description", ""),
+                        ))
+                        products_added += 1
+                    except Exception:
+                        pass  # duplicate or other error
+
+        # Parse and insert contacts
+        raw_contact = row["contact"]
+        if raw_contact:
+            try:
+                ct = json.loads(raw_contact) if isinstance(raw_contact, str) else raw_contact
+            except Exception:
+                ct = {}
+            if isinstance(ct, dict):
+                ct_company = ct.get("company", "") or ""
+                ct_person = ct.get("person", "") or ""
+                ct_phone = ct.get("phone", "") or ""
+                ct_email = ct.get("email", "") or ""
+                ct_website = ct.get("website", "") or ""
+                ct_address = ct.get("address", "") or ""
+                if any([ct_company, ct_person, ct_phone, ct_email, ct_website, ct_address]):
+                    try:
+                        c.execute("""
+                            INSERT INTO contacts (uuid, document_uuid, document_id, folder, source_file, company, person, phone, email, website, address)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        """, (
+                            str(uuid4()), doc_uuid, doc_id, folder, source_file,
+                            ct_company, ct_person, ct_phone, ct_email, ct_website, ct_address,
+                        ))
+                        contacts_added += 1
+                    except Exception:
+                        pass
+
+    c.commit()
+    c.close()
+    return {"products_added": products_added, "contacts_added": contacts_added}
+
+
+def get_products_table(limit: int = 500) -> list:
+    """SELECT from the normalized products table."""
+    c = _conn()
+    rows = c.execute("SELECT * FROM products ORDER BY company, name LIMIT ?", (limit,)).fetchall()
+    c.close()
+    return [dict(r) for r in rows]
+
+
+def get_contacts_table(limit: int = 500) -> list:
+    """SELECT from the normalized contacts table."""
+    c = _conn()
+    rows = c.execute("SELECT * FROM contacts ORDER BY company, person LIMIT ?", (limit,)).fetchall()
+    c.close()
+    return [dict(r) for r in rows]
+
+
 init_db()
+populate_normalized_tables()

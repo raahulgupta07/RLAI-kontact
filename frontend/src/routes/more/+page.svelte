@@ -18,6 +18,8 @@
   let companies = $state([]);
   let allDocs = $state([]);
   let productSearch = $state('');
+  let contactSearch = $state('');
+  let specsSearch = $state('');
 
   const MAX_PRODUCT_ROWS = 50;
 
@@ -48,6 +50,29 @@
         examples: names.slice(0, 3).join(', ')
       }))
       .sort((a, b) => b.count - a.count);
+  });
+
+  let filteredContacts = $derived.by(() => {
+    if (!contactSearch.trim()) return contacts;
+    const q = contactSearch.toLowerCase();
+    return contacts.filter(c =>
+      (c.company || '').toLowerCase().includes(q) ||
+      (c.person || c.name || '').toLowerCase().includes(q) ||
+      (c.phone || '').toLowerCase().includes(q) ||
+      (c.email || '').toLowerCase().includes(q)
+    );
+  });
+
+  let filteredSpecs = $derived.by(() => {
+    const base = products.filter(p => p.specs);
+    if (!specsSearch.trim()) return base.slice(0, 30);
+    const q = specsSearch.toLowerCase();
+    return base.filter(p =>
+      (p.name || '').toLowerCase().includes(q) ||
+      (p.model || '').toLowerCase().includes(q) ||
+      (p.specs || '').toLowerCase().includes(q) ||
+      (p.company || '').toLowerCase().includes(q)
+    ).slice(0, 30);
   });
 
   let productsWithSpecs = $derived.by(() => {
@@ -339,6 +364,7 @@
     <div class="card ink-border stamp-shadow stats-card table-card">
       <div class="card-body" style="width:100%">
         <h2>&#128222; CONTACTS TABLE</h2>
+        <input type="text" class="search-input ink-border table-search" placeholder="Filter contacts..." bind:value={contactSearch} />
         {#if contacts.length === 0}
           <p class="muted">Loading contacts...</p>
         {:else}
@@ -354,7 +380,7 @@
                 </tr>
               </thead>
               <tbody>
-                {#each contacts as c, i}
+                {#each filteredContacts as c, i}
                   <tr class={i % 2 === 0 ? 'row-even' : 'row-odd'}>
                     <td>{c.company || ''}</td>
                     <td>{c.person || c.name || c.contact_name || ''}</td>
@@ -436,7 +462,8 @@
     <div class="card ink-border stamp-shadow stats-card table-card">
       <div class="card-body" style="width:100%">
         <h2>&#128295; PRODUCT SPECS</h2>
-        {#if productsWithSpecs.length === 0}
+        <input type="text" class="search-input ink-border table-search" placeholder="Filter specs..." bind:value={specsSearch} />
+        {#if filteredSpecs.length === 0}
           <p class="muted">No products with specs found.</p>
         {:else}
           <div class="table-scroll">
@@ -451,7 +478,7 @@
                 </tr>
               </thead>
               <tbody>
-                {#each productsWithSpecs as p, i}
+                {#each filteredSpecs as p, i}
                   <tr class={i % 2 === 0 ? 'row-even' : 'row-odd'}>
                     <td>{p.name}</td>
                     <td>{p.model}</td>
@@ -543,7 +570,7 @@
     max-width: 100%;
     margin: 0 auto;
     padding: 0 1rem 6rem;
-    font-family: 'Courier New', monospace;
+    font-family: 'Space Grotesk', monospace, sans-serif;
   }
 
   .dark-title-bar {
@@ -780,46 +807,54 @@
 
   .table-scroll {
     overflow-x: auto;
+    overflow-y: auto;
+    max-height: 400px;
     -webkit-overflow-scrolling: touch;
     margin-top: 0.25rem;
+    border: 2px solid #1a1a1a;
   }
 
   .data-table {
     width: 100%;
     border-collapse: collapse;
-    font-family: 'Courier New', monospace;
-    font-size: 0.75rem;
+    font-family: 'Space Grotesk', monospace, sans-serif;
+    font-size: 12px;
     min-width: 500px;
   }
 
   .data-table.compact {
-    font-size: 0.7rem;
+    font-size: 11px;
   }
 
   .data-table thead tr {
-    background: #1a1a1a;
-    color: #f5f0e8;
+    background: var(--color-on-surface);
+    color: var(--color-surface);
   }
 
   .data-table th {
-    padding: 0.4rem 0.5rem;
-    font-size: 0.65rem;
-    font-weight: bold;
-    letter-spacing: 0.08em;
+    padding: 6px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     text-align: left;
-    border: 2px solid #1a1a1a;
+    border: 1px solid var(--color-on-surface);
     white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--color-on-surface);
   }
 
   .data-table td {
-    padding: 0.3rem 0.5rem;
-    border: 2px solid #1a1a1a;
+    padding: 5px 10px;
+    border: 1px solid var(--color-on-surface);
     vertical-align: top;
     max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: var(--color-on-surface);
   }
 
   .data-table .specs-cell {
@@ -827,15 +862,16 @@
   }
 
   .row-even {
-    background: #fffef8;
+    background: var(--color-surface-bright);
   }
 
   .row-odd {
-    background: #f5f0e8;
+    background: var(--color-surface-dim);
   }
 
   .data-table tbody tr:hover {
-    background: #e8e3d8;
+    background: var(--color-surface-dim);
+    opacity: 0.9;
   }
 
   .data-table .specs-cell-wide {

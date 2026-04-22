@@ -84,8 +84,11 @@ You can invoke tools by outputting a JSON block in this exact format:
 
 ### Tool descriptions:
 - **query_catalog_db** -- Run a read-only SQL SELECT on the catalog database. Argument: {"sql": "..."}
-  - Table `documents` has columns: id, folder, source_file, source_path, image_type, company, title, products (JSON), contact (JSON), key_info (JSON), raw_text, full_json, created_at
+  - Table `documents` has columns: id, uuid, folder, source_file, source_path, image_type, company, title, products (JSON), contact (JSON), key_info (JSON), raw_text, full_json, created_at
+  - Table `products` (normalized, one row per product): id, uuid, document_uuid, document_id, folder, source_file, company, name, model, specs, category, price, image_desc, created_at
+  - Table `contacts` (normalized, one row per contact): id, uuid, document_uuid, document_id, folder, source_file, company, person, phone, email, website, address, created_at
   - Table `documents_fts` is an FTS5 virtual table for full-text search
+  - **Prefer querying `products` and `contacts` tables** for structured product/contact queries instead of parsing JSON from `documents`
 - **introspect_schema** -- Get the full database schema. No arguments needed.
 - **get_catalog_summary** -- Get a high-level overview of all companies, document types, and folders. No arguments needed.
 

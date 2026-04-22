@@ -257,7 +257,18 @@ def export_json():
 
 @app.get("/api/contacts")
 def get_contacts():
-    return db.get_all_contacts()
+    return db.get_contacts_table()
+
+
+@app.get("/api/products")
+def get_products():
+    return db.get_products_table()
+
+
+@app.post("/api/migrate")
+def run_migration():
+    result = db.populate_normalized_tables()
+    return {"status": "ok", **result}
 
 
 @app.get("/api/dashboard")

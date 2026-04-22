@@ -235,11 +235,29 @@ def get_catalog_summary() -> str:
             except (json.JSONDecodeError, TypeError):
                 pass
 
+        # Products table count (normalized)
+        try:
+            products_table_count = conn.execute(
+                "SELECT COUNT(*) as cnt FROM products"
+            ).fetchone()["cnt"]
+        except Exception:
+            products_table_count = 0
+
+        # Contacts table count (normalized)
+        try:
+            contacts_table_count = conn.execute(
+                "SELECT COUNT(*) as cnt FROM contacts"
+            ).fetchone()["cnt"]
+        except Exception:
+            contacts_table_count = 0
+
         # Build the summary
         lines = [
             "## KONTACT Catalog Summary\n",
             f"- **Total documents (pages):** {total_docs:,}",
             f"- **Total products extracted:** {total_products:,}",
+            f"- **Products table (normalized):** {products_table_count:,}",
+            f"- **Contacts table (normalized):** {contacts_table_count:,}",
             f"- **Companies:** {len(company_list)}",
         ]
 
