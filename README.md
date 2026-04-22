@@ -1,102 +1,103 @@
 # KONTACT — Catalog Vision RAG Agent
 
-Upload photos of product catalogs and brochures, extract structured data with AI vision agents, and chat with an intelligent catalog agent that can run SQL queries, remember facts, and cite sources with images.
+Snap photos of product catalogs at trade shows, extract structured data with AI vision agents, and chat with an intelligent agent that runs SQL queries, remembers facts, cites sources with images, and knows who you met.
 
-## Features
+## What it does
 
-**Upload & Extract**
-- Mobile-first camera upload with drag-and-drop
-- 8 specialized AI extraction agents (products, contacts, tech diagrams, price lists, etc.)
-- Queue-based processing with real-time progress
-- Image quality warnings before upload
-- Retry failed extractions
-
-**Intelligent Chat Agent**
-- Streaming responses (SSE) with RAG ANALYZING animation
-- SQL tool — agent runs queries for precise counts, filtering, aggregation
-- Memory system — learns from feedback (thumbs up/down)
-- Image citations — catalog page thumbnails inline with responses
-- Lightbox — click citations to view full-size source pages
-- Voice input (Web Speech API)
-- Export conversations as markdown
-- Session history with search
-
-**Data Browser**
-- Filter by folder, type, company
-- Sort by date, type, company
-- Expandable cards with products, contacts, key info
-- Copy/Save JSON per document
-- Inline thumbnails
-
-**Search**
-- Full-text search (FTS5)
-- Semantic vector search (ChromaDB + OpenAI embeddings)
-- Dual search with merged results
-
-**Export**
-- JSON export (all data)
-- CSV export (flat table)
-- Chat export (markdown)
+1. **Upload** — Take photos of catalog pages (phone camera, PDF, drag-drop) with EXIF metadata extraction (GPS, camera, date)
+2. **Extract** — 8 specialized AI agents classify and extract products, contacts, specs, prices, diagrams
+3. **Normalize** — Products and contacts stored in separate queryable tables with UUIDs
+4. **Chat** — Intelligent agent with SQL tools, memory, streaming, and image citations
+5. **Browse** — Data tables with filters, sort, search, metadata, and Excel export
 
 ## Quick Start
 
-### Docker (recommended)
-
 ```bash
-cp .env.example .env
-# Add your OPENROUTER_API_KEY to .env
-
-./deploy.sh
+# Docker (recommended)
+cp .env.example .env        # Add your OPENROUTER_API_KEY
+./deploy.sh                 # Build + start
 # Open http://localhost:8000
-```
 
-### Manual
-
-```bash
-# Backend
+# Manual
 pip3 install -r requirements.txt
-pip3 install chromadb sentence-transformers
-
-# Frontend
+pip3 install chromadb sentence-transformers openpyxl
 cd frontend && npm install && npm run build && cd ..
-
-# Run
 python3 -m uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
 ## Architecture
 
 ```
-Phone/Browser                      Backend
-─────────────                      ───────
-Take photo      ──► Upload ──►    Queue (instant, auto-process in background)
-                                    │
-                                    ▼
-                    Classify ──►  Classifier Agent → "product_page"
-                                    │
-                                    ▼
-                    Extract  ──►  Specialized Agent → Structured JSON
-                                    │
-                                    ▼
-                                  SQLite + ChromaDB (indexed)
-                                    │
-Ask question    ──► Agent  ──►   RAG (semantic + FTS5) + SQL Tools + Memory
-                                    │
-                                    ▼
-                                  Streaming Answer + Image Citations
+Phone Camera (with GPS/EXIF)
+    │
+    ▼
+Upload → Queue (auto-process in background)
+    │
+    ▼
+Classifier Agent → "product_page" / "contact_page" / "tech_diagram" / ...
+    │
+    ▼
+Specialized Agent → Structured JSON
+    │
+    ▼
+Normalize → documents + products + contacts tables (with UUIDs)
+    │
+    ▼
+Index → SQLite FTS5 + ChromaDB vectors
+    │
+    ▼
+Chat Agent ← RAG context + SQL tools + memory + feedback
+    │
+    ▼
+Streaming Answer + Image Citations + Follow-up Suggestions
 ```
 
 ## Agent Capabilities
 
+The chat agent is more than a simple RAG — it has **SQL tools** and **memory**:
+
+```
+User: "Who did I meet at the trade show?"
+Agent: [TOOL: query_catalog_db] SELECT company, person, phone, email FROM contacts
+→ Returns full contact table with Shirley (+86-15268367084), Dahua Technology, etc.
+
+User: "How many data strip products?"
+Agent: [TOOL: query_catalog_db] SELECT COUNT(*) FROM products WHERE category = 'data strips'
+→ "There are 24 data strip products"
+
+User: "Where was this catalog photographed?"
+Agent: [TOOL: query_catalog_db] SELECT folder, gps_lat, gps_lng FROM documents WHERE gps_lat IS NOT NULL
+→ Shows GPS coordinates from phone camera EXIF data
+```
+
 | Capability | How |
 |-----------|-----|
-| **Count & aggregate** | SQL tool: `SELECT COUNT(*) FROM documents` |
-| **Filter & compare** | SQL tool: `SELECT * FROM documents WHERE company = 'Ahua'` |
-| **Search products** | RAG: semantic + keyword search across all catalogs |
-| **Inspect schema** | Schema tool: lists tables, columns, sample data |
-| **Remember facts** | Memory system: saves/recalls facts across sessions |
-| **Learn from feedback** | Thumbs up/down → improves future responses |
-| **Cite sources** | Image citations with clickable thumbnails |
+| Count & aggregate | SQL: `SELECT COUNT(*), category FROM products GROUP BY category` |
+| Filter & compare | SQL: `SELECT * FROM products WHERE company = 'Ahua'` |
+| Find contacts | SQL: `SELECT company, person, phone, email FROM contacts` |
+| Search products | RAG: semantic + keyword search across all catalogs |
+| Remember facts | Memory: saves/recalls facts across sessions |
+| Learn from feedback | Thumbs up/down improves future responses |
+| Cite sources | Image citations with clickable thumbnails |
+| Know locations | EXIF: GPS coordinates from phone photos |
+
+## Database Schema
+
+```
+documents (36 rows)              products (131 rows)              contacts (6 rows)
+├── uuid                         ├── uuid                         ├── uuid
+├── folder                       ├── document_uuid ──FK──►        ├── document_uuid ──FK──►
+├── source_file                  ├── company                      ├── company
+├── image_type                   ├── name                         ├── person
+├── company                      ├── model                        ├── phone
+├── title                        ├── specs                        ├── email
+├── gps_lat / gps_lng            ├── category                     ├── website
+├── date_taken                   ├── price                        ├── address
+├── camera_make / camera_model   ├── image_desc                   └── created_at
+├── img_width / img_height       └── created_at
+├── file_size_kb
+└── created_at
+```
 
 ## 8 Extraction Agents
 
@@ -111,43 +112,87 @@ Ask question    ──► Agent  ──►   RAG (semantic + FTS5) + SQL Tools +
 | Price List | Items with prices, units, currency |
 | Other | General text and key info |
 
-## API Endpoints (20+)
+## UI Features
+
+**Chat Agent**
+- Streaming SSE with RAG ANALYZING animation
+- CLI execution bar with tool steps + checkmarks
+- Image citations (clickable thumbnails with lightbox)
+- Thumbs up/down feedback (connected to memory)
+- Voice input (Web Speech API)
+- Export conversation as markdown
+- Session history with search
+- Follow-up suggestion chips
+- 60s stream timeout protection
+
+**Data Browser**
+- Filter by folder + image type, sort by date/type/company
+- Expandable cards with thumbnail, products, contacts, metadata
+- Metadata tags: dimensions, file size, UUID, GPS, camera, date taken
+- Copy/Save JSON per document
+
+**Queue Manager**
+- Inline expand with document thumbnails
+- Retry/delete failed items, toast notifications
+- Processing progress with terminal log
+
+**More Page**
+- Products table (131 rows, searchable, XLSX export)
+- Contacts table (6 rows, searchable)
+- Companies table (14 with doc/product counts)
+- Categories breakdown (28 categories)
+- Product specs table (85 with specs)
+- Image gallery (36 thumbnails)
+- Documents table (UUID, dimensions, file size, GPS, dates)
+
+**Upload**
+- Camera + drag-drop + PDF upload (auto-splits pages)
+- Real upload progress bar
+- Image quality warnings
+- HEIC/HEIF/AVIF/TIFF/JFIF support
+
+## API Endpoints (25+)
 
 | Endpoint | Purpose |
 |----------|---------|
-| `POST /api/upload` | Upload images (auto-processes in background) |
-| `POST /api/process` | Manually process pending items |
-| `GET /api/queue/batches` | View all batches with progress |
-| `POST /api/queue/retry/{id}` | Retry failed extraction |
+| `POST /api/upload` | Upload images/PDFs (auto-processes) |
 | `POST /api/chat/stream` | Streaming chat with SQL tools (SSE) |
 | `POST /api/chat` | Non-streaming chat |
-| `GET /api/chat/sessions` | List chat sessions with previews |
+| `GET /api/products` | All products (normalized table) |
+| `GET /api/contacts` | All contacts (normalized table) |
+| `GET /api/dashboard` | Stats + breakdowns |
+| `GET /api/documents/metadata` | Documents with EXIF metadata |
 | `GET /api/search?q=` | Full-text search |
 | `GET /api/search/semantic?q=` | Semantic vector search |
-| `GET /api/data` | Browse extracted documents |
+| `GET /api/data` | All extracted documents |
+| `GET /api/queue/batches` | Queue management |
+| `POST /api/queue/retry/{id}` | Retry failed extraction |
+| `DELETE /api/batch/{id}` | Delete batch |
+| `GET /api/export/xlsx` | Excel export (3 sheets) |
+| `GET /api/export/json` | JSON export |
+| `GET /api/export/csv` | CSV export |
+| `POST /api/feedback` | Save thumbs up/down |
+| `GET /api/memories` | Agent memories |
+| `POST /api/migrate` | Run table normalization |
 | `GET /api/image/{folder}/{file}` | Serve catalog images |
-| `GET /api/export/json` | Export all data as JSON |
-| `GET /api/export/csv` | Export as CSV |
-| `POST /api/feedback` | Save thumbs up/down feedback |
-| `GET /api/memories` | View agent memories |
 | `GET /api/config` | Model configuration |
-| `GET /health` | Health check |
+| `GET /health` | Health check (Docker) |
 
 ## Tech Stack
 
 | Component | Technology |
 |-----------|-----------|
-| Backend | FastAPI + Python 3.12 |
+| Backend | FastAPI + Python 3.12 (2,467 lines) |
+| Frontend | SvelteKit 5 + Tailwind v4 (4,649 lines) |
 | LLM | Gemini 3.1 Flash Lite via OpenRouter |
 | Embeddings | OpenAI text-embedding-3-small via OpenRouter |
-| Database | SQLite (WAL mode) + FTS5 full-text search |
+| Database | SQLite (WAL) + FTS5 + normalized tables |
 | Vectors | ChromaDB (persistent, local) |
-| Frontend | SvelteKit 5 + Tailwind v4 |
-| Design | Brutalist (Space Grotesk, no border-radius, ink borders) |
-| Deploy | Docker (multi-stage build) |
+| Design | Brutalist (Space Grotesk, no border-radius) |
+| Deploy | Docker (multi-stage, healthcheck) |
 | PWA | Installable, network-first caching |
 
-## Environment Variables
+## Environment
 
 | Variable | Required | Default |
 |----------|----------|---------|
@@ -161,44 +206,33 @@ Ask question    ──► Agent  ──►   RAG (semantic + FTS5) + SQL Tools +
 
 ```
 City-KONTACT/
-├── main.py              # FastAPI (20+ endpoints, SSE streaming, SPA)
-├── chat.py              # RAG agent with SQL tool loop + memory
+├── main.py              # FastAPI (25+ endpoints, SSE streaming)
+├── chat.py              # Agent with RAG + SQL tool loop + memory
 ├── tools.py             # SQL tool, schema introspect, catalog summary
 ├── memory.py            # Feedback + memories (JSON file-based)
-├── database.py          # SQLite + FTS5 + queue + chat history
+├── database.py          # SQLite + FTS5 + normalized tables + UUIDs
 ├── vectorstore.py       # ChromaDB + OpenRouter embeddings
 ├── config.py            # Environment-based configuration
 ├── pipeline/
-│   ├── loader.py        # Image loading + preprocessing
+│   ├── loader.py        # Image + PDF + EXIF extraction
 │   ├── extractor.py     # Async batch extraction
 │   └── agents.py        # 8 specialized extraction prompts
-├── frontend/
-│   └── src/routes/
-│       ├── upload/      # Camera/gallery upload
-│       ├── queue/       # Batch management + inline expand
-│       ├── chat/        # Agent chat (streaming, citations, history)
-│       ├── data/        # Document browser (filter, sort, export)
-│       └── more/        # Search, export, stats, models
+├── frontend/src/routes/
+│   ├── upload/          # Camera/PDF upload with quality warnings
+│   ├── queue/           # Batch management + inline expand
+│   ├── chat/            # Agent (streaming, SQL tools, citations)
+│   ├── data/            # Document browser (metadata, filter, sort)
+│   └── more/            # Tables, gallery, search, export, stats
 ├── data/
 │   ├── uploads/         # Uploaded images (portable)
 │   ├── extractions/     # JSON extraction results
 │   ├── chroma/          # Vector store
-│   └── kontact.db       # SQLite database
-├── Dockerfile           # Multi-stage (Node + Python)
-├── docker-compose.yml   # Production-ready with healthcheck
+│   └── kontact.db       # SQLite (documents + products + contacts)
+├── Dockerfile           # Multi-stage (Node + Python + healthcheck)
+├── docker-compose.yml   # Production-ready
 ├── deploy.sh            # One-command deployment
 └── .env.example         # Configuration template
 ```
-
-## Screenshots
-
-**Chat Agent** — Streaming responses with SQL tools, image citations, CLI execution bar
-
-**Queue** — Batch management with inline document expand, thumbnails, retry
-
-**Data Browser** — Filter/sort documents, expandable cards with products and contacts
-
-**Upload** — Mobile camera capture, drag-drop, image quality warnings
 
 ## License
 
