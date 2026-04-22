@@ -2,7 +2,13 @@ import base64, os
 from PIL import Image
 from io import BytesIO
 
-SUPPORTED = {".jpg", ".jpeg", ".png", ".jfif", ".webp", ".bmp"}
+try:
+    from pillow_heif import register_heif_opener
+    register_heif_opener()
+except ImportError:
+    pass
+
+SUPPORTED = {".jpg", ".jpeg", ".png", ".jfif", ".webp", ".bmp", ".heic", ".heif", ".tiff", ".tif", ".avif", ".gif"}
 MAX_PX = 4096
 
 
