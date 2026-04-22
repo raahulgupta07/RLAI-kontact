@@ -160,8 +160,7 @@
     <input
       bind:this={fileInput}
       type="file"
-      accept="image/*"
-      capture="environment"
+      accept="image/*,.jfif,.jfif,.webp,.bmp,.tiff,image/jpeg,image/png,image/gif,image/webp,image/bmp,image/tiff"
       multiple
       onchange={handleFiles}
       class="file-input-hidden"
